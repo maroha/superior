@@ -61,7 +61,7 @@ Yes, costomer can show his document, and discount can be made by finding him in 
 Costomer will get his money back, if there is no opertunity to replace order.
 32. Can be order canceled after order payment?
 Yes, it can be, after reciving  payment money. 
-  * **Palun seda kõsimust selgitada.**
+  * **Palun seda küsimust selgitada.**
 
 **Head waiter**  
 
