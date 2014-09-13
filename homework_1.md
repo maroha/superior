@@ -87,41 +87,41 @@ Yes.
 11. Should the system track working hours of the waiters?
 Yes.
 12. Do you need to have an overview of currently open orders?
-13. 
-14. Do you want take reservations from the internet?
 Yes.
-15. Would you like the client to be able to give feedback about the service?
+13. Do you want take reservations from the internet?
+Yes.
+14. Would you like the client to be able to give feedback about the service?
 Yes, that'd be cool. Would make my work a lot easier if the customers could compliment/write a reportof the service.
-16. How should reporting problems function?
+15. How should reporting problems function?
 Employees will write a note in the system and whoever in charge or currently available will have to deal with it.
-17. Is it possible withdraw all of the money from cash register?
+16. Is it possible withdraw all of the money from cash register?
 No some is left for cash exchange purposes.
-18. How would you like to send advertisments to the regular members? For example SMS or email? We would like to send advertisments via email.
-19. Do you keep track of the regular customers?
+17. How would you like to send advertisments to the regular members? For example SMS or email? We would like to send advertisments via email.
+18. Do you keep track of the regular customers?
 Yes, we have a list.
-20. Do you prefer using the system in your native language or in english?
+199. Do you prefer using the system in your native language or in english?
 I do prefer it in my native language, but I can see that most of the waiters use the english version.
 It's not up to me to decide, what language should be used.
-21. Do you prefer touchscreen or keyboard?
+20. Do you prefer touchscreen or keyboard?
 I'm oldschool. Keyboard please.
-22. How do you want to log-in? with passwords or a keycard?
+21. How do you want to log-in? with passwords or a keycard?
 I think keycard would be better. Then there wouldn't be any worries to remember the passwords and account ID's.
-23. So, you want to keep track of the regular customers?
+22. So, you want to keep track of the regular customers?
 Yes, that's correct.
-24. Yes, that is possible. Is it necessary for the headwaiter to confirm this?
+23. Yes, that is possible. Is it necessary for the headwaiter to confirm this?
 Yes.
-25. Should the system track working hours?
+24. Should the system track working hours?
 Ofcourse, that is necessary.
-26.Do you want to include waiter's tips in the system?
+25.Do you want to include waiter's tips in the system?
 No, dealing with tips is up to the waiters.Even if we made tracking mandatory, 
 I seriously doubt they would be honest about it ;)
-27. Would you like the client to be able to give feedback about the service?
+26. Would you like the client to be able to give feedback about the service?
 Yes, that'd be cool. Would make my work a lot easier if the customers could compliment/write a report of the service.
-28. How should reporting problems function?
+27. How should reporting problems function?
 Employees will write a note in the system and whoever in charge or currently available will have to deal with it.
-29. Do you prefer using the system in your native language or in english?
+28. Do you prefer using the system in your native language or in english?
 I do prefer it in my native language, but I can see that most of the waiters use the english version. It's not up to me to decide, what language should be used.
-30. Do you prefer touchscreen or keyboard?
+29. Do you prefer touchscreen or keyboard?
 
 
 **Restaurant manager**  
@@ -164,7 +164,7 @@ No, it can make head waiter.
 Yes.
 19. What has bad with old POS?
 Every restaurant has its own POS.
-  * Mis selle küsimuse mõte on, vastus midagi ka ei selgita?
+  * **Mis selle küsimuse mõte on, vastus midagi ka ei selgita?**
 20. Do you need to have an option to enter special offers?
 Yes, to order goods from the warehouse.
 21. Do you need system administrator in your restaurant?
