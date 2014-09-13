@@ -303,7 +303,7 @@ Waiter, Head Waiter, Restaurant Manager, Administrator.
 **Performance**  
 1. Database inquiry must not take longer than a second.  
 2. Digital transaction must not take longer than 5s.  
-3. 3. User interface actions must not take more than a second.  
+3. User interface actions must not take more than a second.  
 4. A simple report must take less than 30s. None must take more than 90s.  
 5. Delay between server and client must be less than 0.5s.  
 
