@@ -49,17 +49,19 @@ Yes, we have a membership list, provided that they can identify themselves?
 26. Does order have some money limit?
 No, it is not limited.
 27. How is your salary organized?
-Every worker has his fixed hour payment, every word day is 8 hours.
+Every worker has his fixed hour payment, every work day is 8 hours.
 28. How are they rounding your work hours?
 Every employee has fixed 8 work hours a day, exept weekends
 29. Can bill have an additional discount, if costumer have birthday?
 No, only membership card can give order discount
 30. Will costomer get discount if he forgot his membership card?
-Yes, costomer can show his document, and discount can be made by finding him in membership list
+Yes, costomer can show his document, and discount can be made by finding him in membership list.
+  * **Mis mõte üldse liikmekaardil on, kui seda ei lähe tegelikult vaja?**
 31. Can costomer get money back for wrong order, or only order change?
 Costomer will get his money back, if there is no opertunity to replace order.
 32. Can be order canceled after order payment?
 Yes, it can be, after reciving  payment money. 
+  * **Palun seda kõsimust selgitada.**
 
 **Head waiter**  
 
@@ -154,21 +156,25 @@ Yes, thats part of my job.
 Yes.
 14. Where do you want to store the log files of waiter's clock-in's, cash-ins/outs etc?
 This data will be stored at DB table.
+  * **Miks peaks kasutajaid olema huvitatud sellest, kus POS andmeid salvestatakse? Niguinii hoitakse kõiki anmeid ju andmebaasides.**
 15. Do you need a tutorial after your first log in?
 No.
 16. How are your employees getting their money transfered to their account after you acquire their hours worked from the POS?
 Accountant gets that data, and make employees trasfer.
+  * **Kas POS peaks siis ka töötajate palkasid haldama?**
 17. Should waiters have the option to delete a check or should it be only for managers?
 No, it can make head waiter.
-18. Can you whatch all waiters logs?
+  * **Ma eeldan et sa checki all mõtled tellimust? Kas iga kelner ei peaks mitte oma tellimusi saama hallata ning pea kelner saab kõigi teise tellimusi hallata?**
+18. Can you watch all waiters logs?
 Yes.
 19. What has bad with old POS?
 Every restaurant has its own POS.
-  * **Mis selle küsimuse mõte on, vastus midagi ka ei selgita?**
+  * **Mis selle küsimuse mõte on, vastus midagi selgita?**
 20. Do you need to have an option to enter special offers?
 Yes, to order goods from the warehouse.
 21. Do you need system administrator in your restaurant?
 Yes, it would be great.
+  * **Kas see pole mitte ilmne, et igal süsteemil on vajali süsteemi administraator?**
 30. Do you need an overview of warehouse current state?
 Yes.
 31. Do you have daily, weekly or any interval discounts for certain purchases?
@@ -184,8 +190,10 @@ Our POS isn't big enough to support our expansion.
 We prefer passwords for everybody, it's cheaper that way.
 3. Who will be having the access to the system to reset the lost passwords? Or will it be automatic?
 It's automatic, via email.
+  * **Veidi arusaamatu küsimus. Kas on nii, et kui kasutaja on oma salasõna unustanud, siis saab selle emailile küsida?**
 4. How much information about your workers you want to include in the system?
 Their name and contact will do.
+  * **Kontonumbrit ei pea teadma?**
 5. What kind of reports do you need?
 The same, as for the manager, but with the opportunity to see total reports on all restaurants, and also to view only a few from them. Also would like to see reportsabout incidents in the restaurants, if there were any.
 6. What kind of information you want included in these reports?
