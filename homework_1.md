@@ -153,21 +153,22 @@ Yes, thats part of my job.
 13. Can the order become void?
 Yes.
 14. Where do you want to store the log files of waiter's clock-in's, cash-ins/outs etc?
-15. This data will be stored at DB table.
-16. Do you need a tutorial after your first log in?
-17. No.
-18. How are your employees getting their money transfered to their account after you acquire their hours worked from the POS?
-19. Accountant gets that data, and make employees trasfer.
-20. Should waiters have the option to delete a check or should it be only for managers?
-21. No, it can make head waiter.
-22. Can you whatch all waiters logs?
-23. Yes.
-24. What has bad with old POS?
-25. Every restaurant has its own POS.
-26. Do you need to have an option to enter special offers?
-27. Yes, to order goods from the warehouse.
-28. Do you need system administrator in your restaurant?
-29. Yes, it would be great.
+This data will be stored at DB table.
+15. Do you need a tutorial after your first log in?
+No.
+16. How are your employees getting their money transfered to their account after you acquire their hours worked from the POS?
+Accountant gets that data, and make employees trasfer.
+17. Should waiters have the option to delete a check or should it be only for managers?
+No, it can make head waiter.
+18. Can you whatch all waiters logs?
+Yes.
+19. What has bad with old POS?
+Every restaurant has its own POS.
+  * Mis selle küsimuse mõte on, vastus midagi ka ei selgita?
+20. Do you need to have an option to enter special offers?
+Yes, to order goods from the warehouse.
+21. Do you need system administrator in your restaurant?
+Yes, it would be great.
 30. Do you need an overview of warehouse current state?
 Yes.
 31. Do you have daily, weekly or any interval discounts for certain purchases?
@@ -285,15 +286,15 @@ Waiter, Head Waiter, Restaurant Manager, Administrator.
 ###SMART requirements to usability and performance. 
 
 **Usability**
-1. Clickable areas should be big and clearly visible.
-2. User interface must be minimalistic.
-3. Doing any kind of action shouldn’t take more than a few clicks.
-4. All text should be simple and understandable.
-5. Any kind of critical (such as payment) action shall have a warning dialog.
+1. Clickable areas should be big and clearly visible.  
+2. User interface must be minimalistic.  
+3. Doing any kind of action shouldn’t take more than a few clicks.  
+4. All text should be simple and understandable.  
+5. Any kind of critical (such as payment) action shall have a warning dialog.  
 
 **Performance**
-1. Database inquiry must not take longer than a second.
-2. Digital transaction must not take longer than 5s.
-3. 3. User interface actions must not take more than a second.
-4. A simple report must take less than 30s. None must take more than 90s.
-5. Delay between server and client must be less than 0.5s.
+1. Database inquiry must not take longer than a second.  
+2. Digital transaction must not take longer than 5s.  
+3. 3. User interface actions must not take more than a second.  
+4. A simple report must take less than 30s. None must take more than 90s.  
+5. Delay between server and client must be less than 0.5s.  
