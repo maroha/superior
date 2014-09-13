@@ -309,16 +309,16 @@ Waiter, Head Waiter, Restaurant Manager, Administrator.
 
 
 > SMART
-Usability
-1)Wherever in the POS the user currently is, it will always be possible to click the help button.
-2)The help button will has a hyper-link to the manual.
-3)All prompted system errors can be reported.
-4)If a user is takin an action that takes the system for longer than a second to respond, "please wait" msg will appear.
-5)The staff should be able to make a new order in 30 seconds.
-Performance
-1)System has to work for in the supported OS for the next 5 years.
-3)System is able to serve all the restaurants and its waiters.
-4)If database is down, data will be stored in the local server until the problem is fixed.
-5)The system works 99% of time, allowed stops for maintenance.
+Usability  
+1)Wherever in the POS the user currently is, it will always be possible to click the help button.  
+2)The help button will has a hyper-link to the manual.  
+3)All prompted system errors can be reported.  
+4)If a user is takin an action that takes the system for longer than a second to respond, "please wait" msg will appear.  
+5)The staff should be able to make a new order in 30 seconds.  
+Performance  
+1)System has to work for in the supported OS for the next 5 years.  
+3)System is able to serve all the restaurants and its waiters.  
+4)If database is down, data will be stored in the local server until the problem is fixed.  
+5)The system works 99% of time, allowed stops for maintenance.  
 
 * **Minu arust on need liiga ebamäärased ja mõni pole üldse SMART.**
