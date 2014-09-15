@@ -2,66 +2,63 @@
 
 **Waiter**  
 
-1. What is your biggest issue with the current POS system?
-Everything works fine, although sometimes it gets slow and taking an order is be delayed because of it.
-2. Must clients pay for the order immediately after its entered to the system or can the bill be left open? 
-Client must not pay immediately, therfore bill can be left open.
-3. Do you record the table number?
-Yes.
-4. Do you record the number of guests in a table?
-Yes.
-5. Is it possible that an order could be gifted / be on the house?
-Yes, such an option should be available.
-6. Must an open bill have a limit? If so, will it depend on the client? 
-Limit is 100€ for all clients.
-7. Would you like for the system to show the most ordered items?
-Yes.
-8. Would you like for the system to show the most discounted items?
-Yes
-9. Can the limit be increased if client is using an accepted credit card?
-No it cannot be increased.
-10. Should waiters be able to hand the bill over to the other waiter?
-No, we dont hand over bills to other waiters.
-11. Do you have any gift cards that the customers can pay with?
-No, we have only membership cards that apply discounts.
-12. Can you describe about your discount system?
-Each customer who has a membership card, can have a 15% discount for all drinks.
-13. Can open order be edited?
+1.	What is your biggest issue with the current POS system?
+Everything works fine, although sometimes it becomes slow and ordering suffers.
+2.	Must clients pay for the order immediately after it’s entered to the system or can the bill be left open? 
+Clients can pay later, bill can be left open.
+3.	Can open order be edited?
 Yes, I can edit my own open orders. Head waiter can edit all open orders.
-14. Do you have a list for people who aren't allowed inside your restaurant?
-15. Yes, we have a list of banned people.
-16. Can the order be divided into several orders?
+4.	Can the order be divided into several orders?
 Yes, the order can be split.
-17. How do you recognize a member?
-He/She can be recognized by membership card or other official document.
-18. Can a bill have an additional discount, when a costumer is having a birthday?
-No, only the membership card can give order discount.
-19. When customer has made a mistake in the order or would like to change the order after payment, can he/she get the money back?
-Yes he/she can.
-20. Does your restaurant give coupon discounts?
+5.	Might you need to reopen a closed order?
+Yes.
+6.	Do you record the table number of an order?
+Yes.
+7.	Do you record the number of guests in a table?
+Yes.
+8.	Can an order be gifted / on the house?
+Yes, it can.
+9.	Must an open bill have a limit? If so, will it depend on the client? 
+Limit is 100€ for all clients. It doesn’t depend on the client.
+10.	Can the limit be increased if the client is using an accepted credit card?
+No it cannot be increased.
+11.	Should waiters be able to hand the bill over to the other waiter?
+No, we don’t hand over bills to other waiters.
+12.	Do you have any gift cards that the customers can pay with?
+No, we have only membership cards that apply discounts.
+13.	Can you describe your discount system?
+Each customer who has a membership card, has 15% discount for all drinks.
+14.	Does your restaurant give coupon discounts?
 No.
-21. Is it possible to pay the bill in multiple payment methods?
-22. Yes its possible.
-23. Might you need to reopen a closed order?
-24. Yes.
-25. Will a member get discount if he forgot his membership card?
-Yes, we have a membership list, provided that they can identify themselves?
-26. Does order have some money limit?
+15.	Can a bill have an additional discount, when a customer is having a birthday?
+No, only the membership card can give order discount.
+16.	Do you have a list for people who aren't allowed inside your restaurant?
+Yes, we have a list of banned people.
+17.	When customer has made a mistake in the order or would like to change the order after payment, can he/she get the money back?
+Yes he/she can.
+18.	Is it possible to pay the bill in multiple payment methods?
+Yes, it’s possible.
+19.	Would you like for the system to show the most ordered items?
+Yes.
+20.	Would you like for the system to show the most discounted items?
+Yes.
+21.	How is your salary organized?
+Every worker has his fixed hour payment, every word day is 8 hours.
+22.	How are they rounding your work hours?
+Every employee has fixed 8 work hours a day, except weekend
+23.	Can be order canceled after order payment?
+Yes, it can be, after receiving  payment money.
+ * **Palun seda küsimust selgitada.**
+24.	How do you recognize a member?
+They can be recognized by membership card or other official document.
+ * **Kas 13. küsimus ei anna sellele vastust?**
+25.	Will a member get discount if he forgot his membership card?
+Yes, we have a membership list, provided that they can identify themselves.
+ * **Mis mõte üldse liikmekaardil on, kui seda ei lähe tegelikult vaja?**
+26.	Does order have some money limit?
 No, it is not limited.
-27. How is your salary organized?
-Every worker has his fixed hour payment, every work day is 8 hours.
-28. How are they rounding your work hours?
-Every employee has fixed 8 work hours a day, exept weekends
-29. Can bill have an additional discount, if costumer have birthday?
-No, only membership card can give order discount
-30. Will costomer get discount if he forgot his membership card?
-Yes, costomer can show his document, and discount can be made by finding him in membership list.
-  * **Mis mõte üldse liikmekaardil on, kui seda ei lähe tegelikult vaja?**
-31. Can costomer get money back for wrong order, or only order change?
-Costomer will get his money back, if there is no opertunity to replace order.
-32. Can be order canceled after order payment?
-Yes, it can be, after reciving  payment money. 
-  * **Palun seda küsimust selgitada.**
+ * **Mis vahel on sellel ja 8ndal küsimusel?**
+
 
 **Head waiter**  
 
