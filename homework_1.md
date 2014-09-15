@@ -120,59 +120,64 @@ Yes.
 
 **Restaurant manager**  
 
-1. Should we support credit cards at all? Which credit cards?
+1.	Should we support credit cards at all? Which credit cards?
 All the known ones.
-2. Should we support debit cards at all? Which ones?
+2.	Should we support debit cards at all? Which ones?
 All the known ones.
-3. Do you give bonuses to the waiters? If yes, then how is it calculated?
+3.	Do you give bonuses to the waiters? If yes, then how is it calculated?
 We have a pool from which waiters get a percentage based on the amount of their total orders.
-4. What details need to be described to order a certain good from a warehouse?
-1. name 2. product type 3. amount 4. expiration date
-5. With how many warehouses you have a contract with?
+4.	With how many warehouses you have a contract with?
 We have contract with 3 warehouses.
-6. Do you have any other functions besides the head waiter rights other than ordering from a warehouse and calculating bonuses?
-No, thats all.
-7. Who can change the menu?
-Only I do.
-8. Do you need the reports to be generated in some certain format for exporting data from the POS system?
-Yes, it should be good.
-9. When an menu item is out of stock, should it be automatically disabled from ordering.
-Yes, it's essential.
-10. How often is the menu changed? 
-Abou once per week.
-11. Can the system automatically replenish stock based on custom settings?
-Yes it would be very helpful.
-12. Are you allowed to change the menu items prices?
-Yes, thats part of my job.
-13. Can the order become void?
-Yes.
-14. Where do you want to store the log files of waiter's clock-in's, cash-ins/outs etc?
-This data will be stored at DB table.
-  * **Miks peaks kasutajaid olema huvitatud sellest, kus POS andmeid salvestatakse? Niguinii hoitakse kõiki anmeid ju andmebaasides.**
-15. Do you need a tutorial after your first log in?
+5.	What details need to be described to order a certain good from a warehouse?
+Name, product, amount and expiration date.
+6.	Do you have any other functions besides the head waiter rights other than ordering from a warehouse and calculating bonuses?
 No.
-16. How are your employees getting their money transfered to their account after you acquire their hours worked from the POS?
-Accountant gets that data, and make employees trasfer.
-  * **Kas POS peaks siis ka töötajate palkasid haldama?**
-17. Should waiters have the option to delete a check or should it be only for managers?
-No, it can make head waiter.
-  * **Ma eeldan et sa checki all mõtled tellimust? Kas iga kelner ei peaks mitte oma tellimusi saama hallata ning pea kelner saab kõigi teise tellimusi hallata?**
-18. Can you watch all waiters logs?
+7.	Who can change the menu?
+Only I do.
+8.	How often is the menu changed? 
+About once per week.
+9.	Are you allowed to change the menu items prices?
 Yes.
-19. What has bad with old POS?
-Every restaurant has its own POS.
-  * **Mis selle küsimuse mõte on, vastus midagi selgita?**
-20. Do you need to have an option to enter special offers?
-Yes, to order goods from the warehouse.
-21. Do you need system administrator in your restaurant?
-Yes, it would be great.
-  * **Kas see pole mitte ilmne, et igal süsteemil on vajali süsteemi administraator?**
-30. Do you need an overview of warehouse current state?
+10.	When a menu item is out of stock, should it be automatically disabled from ordering.
 Yes.
-31. Do you have daily, weekly or any interval discounts for certain purchases?
+11.	Should the system automatically replenish stock based on custom settings?
+Yes it would be very helpful.
+12.	Do you need an overview of warehouse current state?
+Yes.
+13.	Do you have daily, weekly or any interval discounts for certain purchases?
 Yes, at times some items are on discount.
-32. Does the system need to include the taxes?
-Yes, of course. 
+14.	Can the order become void?
+Yes.
+Should the system include taxes in calculations?
+Yes.
+15.	Do you need system administrator in your restaurant?
+Yes, it would be great.
+ * **Kas see pole mitte ilmne, et igal süsteemil on vaja süsteemi administraator?**
+16.	What has bad with old POS?
+Every restaurant has its own POS.
+ * **Mis selle küsimuse mõte on, vastus midagi selgita?**
+17.	Should waiters have the option to delete a check or should it be only for managers?
+No, it can make head waiter.
+ * **Ma eeldan et sa checki all mõtled tellimust? Kas iga kelner ei peaks mitte oma tellimusi saama hallata ning pea kelner saab kõigi teise tellimusi hallata?**
+18.	How are your employees getting their money transfered to their account after you acquire their hours worked from the POS?
+Accountant gets that data, and make employees trasfer.
+ * **Kas POS peaks siis ka töötajate palkasid haldama?**
+19.	Where do you want to store the log files of waiter's clock-in's, cash-ins/outs etc.
+This data will be stored at DB table.
+ * **Miks peaks kasutajaid olema huvitatud sellest, kus POS andmeid salvestatakse? Niguinii hoitakse kõiki anmeid ju andmebaasides.**
+20.	Can you watch all waiters logs?
+21.	Yes.
+ * **Mida veel võib log sisaldada peale tellmuste ajalugu?**
+22.	Do you need to have an option to enter special offers?
+Yes, to order goods from the warehouse.
+ * **Palun küsimust selgitada.**
+23.	Do you need a tutorial after your first log in?
+No.
+ * **Kas õpetus / kasutusjuhend pole osa tarkvarast ning pole valikuline?**
+Do you need the reports to be generated in some certain format for exporting data from the POS system?
+Yes, it should be good.
+ * **Kuidas see küsimus meid targemaks teeb?**
+
 
 **Administrator (Back office)**  
 
