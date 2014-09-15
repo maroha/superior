@@ -62,65 +62,60 @@ No, it is not limited.
 
 **Head waiter**  
 
-1. What is your biggest issue with the current POS system?
-I'm not sure it is the biggest problem that we have, but what annoys me the most is that we don't have a properly functioning patron list/system in our old POS.
-2. How does your patron system work?
-We have different levels of membership statuses that give certain discounts depending on how much the member has ordered.
-3. Do all waiters have their own cash registers?
+1.	What is your biggest issue with the current POS system?
+We don't have a membership list in the system.
+2.	Do you keep track of the regular customers (members)?
+Yes, we have a list.
+3.	Can you withdraw all of the money from cash register?
+No, some is left for cash exchange purposes.
+4.	Do you need to have an overview of currently open orders?
+Yes.
+5.	Do all waiters have their own cash registers?
 Yes they do.
-4. What kind of information do you expect to see when recording cash registers states?
-I need to see the amount of orders, total amount of cash inflow.
-5. Are there any functions a waiter should have besides tracking, taking and entering an order and billing the customers,to fully operate the POS?
-They should be able to drop the orders, when necessary.
-6. Do you have any other functions that differ from a regular waiter besides recording cash registers initialand end states? 
+6.	How do you deal with customer complaints?
+Waiter tells the problem to the one currently in charge and they deal with it.
+7.	Would you like the client to be able to give feedback about the service?
+Yes.
+8.	What else waiter should be able to do besides tracking, taking and entering an order and billing the customers?
+They should be able to delete an order.
+9.	How do you deal with the orders that aren't paid for?
+We delete those orders.
+10.	Do you want take reservations from the internet?
+Yes.
+11.	How would you like to send advertisement to the regular members? For example SMS or email?
+We would like to send advertisements via email.
+12.	Do you prefer touchscreen or keyboard?
+Keyboard.
+13.	How do you want to log-in? Using password or a keycard?
+Keycard.
+14.	What kind of information do you need to see when recording cash registers states?
+I need to see the amount of orders and total amount of cash inflow.
+15.	Do you want to include waiter's tips in the system?
+No.
+16.	What else you do besides cash registers management?
 I also create work schedules.
-7. How do you imagine having a work schedule constructed inside the system?
+17.	Should the system track employees working hours?
+Yes.
+18.	How do you imagine having a work schedule constructed inside the system?
 I would like to have a calendar and be able to add waiters from a list to a certain time period.
 I would like to have a monthly schedule that I can update easily.
-8. How do you deal with the orders that aren't paid for?
-We delete those orders.
-9. Do you have the right to look at other waiter's orders and current objectives?
+19.	Might you need to send notes via POS to waiters?
 Yes.
-10. Do you need to send notes via POS to waiters?
+20.	Do you prefer using the system in your native language or in English?
+I prefer native language.
+21.	How does your membership system work?
+We have different levels of membership statuses that give certain discounts depending on how much the member has ordered.
+ * **Vastuolu, kelneri 13-nda küsimusega. Seal on fikseeritud 15% allahindlus.**
+22.	Do you have the right to look at other waiter's orders and current objectives?
 Yes.
-11. Should the system track working hours of the waiters?
-Yes.
-12. Do you need to have an overview of currently open orders?
-Yes.
-13. Do you want take reservations from the internet?
-Yes.
-14. Would you like the client to be able to give feedback about the service?
-Yes, that'd be cool. Would make my work a lot easier if the customers could compliment/write a reportof the service.
-15. How should reporting problems function?
-Employees will write a note in the system and whoever in charge or currently available will have to deal with it.
-16. Is it possible withdraw all of the money from cash register?
-No some is left for cash exchange purposes.
-17. How would you like to send advertisments to the regular members? For example SMS or email? We would like to send advertisments via email.
-18. Do you keep track of the regular customers?
-Yes, we have a list.
-199. Do you prefer using the system in your native language or in english?
-I do prefer it in my native language, but I can see that most of the waiters use the english version.
-It's not up to me to decide, what language should be used.
-20. Do you prefer touchscreen or keyboard?
-I'm oldschool. Keyboard please.
-21. How do you want to log-in? with passwords or a keycard?
-I think keycard would be better. Then there wouldn't be any worries to remember the passwords and account ID's.
-22. So, you want to keep track of the regular customers?
+ * **Mida tähendab “current objectives”, mida see sisaldama peaks?**
+23.	So, you want to keep track of the regular customers?
 Yes, that's correct.
-23. Yes, that is possible. Is it necessary for the headwaiter to confirm this?
+ * **2. küsimus ütleb, et nad juba teevad seda.**
+24.	Yes, that is possible. Is it necessary for the headwaiter to confirm this?
 Yes.
-24. Should the system track working hours?
-Ofcourse, that is necessary.
-25.Do you want to include waiter's tips in the system?
-No, dealing with tips is up to the waiters.Even if we made tracking mandatory, 
-I seriously doubt they would be honest about it ;)
-26. Would you like the client to be able to give feedback about the service?
-Yes, that'd be cool. Would make my work a lot easier if the customers could compliment/write a report of the service.
-27. How should reporting problems function?
-Employees will write a note in the system and whoever in charge or currently available will have to deal with it.
-28. Do you prefer using the system in your native language or in english?
-I do prefer it in my native language, but I can see that most of the waiters use the english version. It's not up to me to decide, what language should be used.
-29. Do you prefer touchscreen or keyboard?
+ * **Mis küsimus on?**
+
 
 
 **Restaurant manager**  
