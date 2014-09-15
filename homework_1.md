@@ -239,57 +239,58 @@ Waiter, Head Waiter, Restaurant Manager, Administrator.
 
 ###Functional requirements the software must support. 
 
-1. The order can be left open.
-2. The order shall have a financial limit set by the [to be determined].
-3. An open order can be split into two open orders.
-4. An order shall have a table number.
-5. An order shall have a number of guests.
-6. The restaurant items items are separated into different categories.
-7. When the client card is used, the order shall be discounted by [set by restaurant manager] before the payment is made.
-8. The system shall keep a static (same for all restaurants) list of banned people.
-9. Only the waiters and head waiter shall be able to take orders.
-10. Payment can be made in multiple smaller different payments. For example half paid by cash and other half by credit card.
-11. A patron system which shows the list of members with their discount levels.
-12. The order can become void.
-13. Voided order shall have a reason for becoming void.
-14. Cash registers are separated between waiters.
-15. Head waiter can view and edit waiters work schedule.
-16. Waiters work schedule is shown as a calendar.
-17. Waiters work schedule is monthly.
-18. Head waiter shall be able to look at all open orders.
-19. A system that recives reservations from the web and stores them into POS. Made reservations is shown as a list.
-20. The system must support keyboards.
-21. The system must support touchscreens.
-22. All widely known credit cards must be supported as a payment method.
-23. All widely known debit cards must be supported as a payment method.
-24. Multiple warehouses management must be supported.
-25. Users can login to the system using a keycard.
-26. Users can login to the system using a username and a password.
-27. Only the restaurant manager can change the menu.
-28. The system must disable ordering items that have run out of stock.
-29. Restaurant manager shall be able to change menu items prices.
-30. Only name and contact information is stored in the system about the workers.
-31. It shall be possible to combine restaurant reports into a single report.
-32. The system must be in english and in the native language.
-33. The membership cards are shared across all restaurants.
-34. Only administrator can change user permissions.
-35. Watiter shall see overview of all orders. Only open is shown by default.
-36. Waiter can edit orders.
-37. Head waiter shall have overview of cash register states.
-38. Waiters’ bonus calculation based on the monthly income of the restaurant (specified in the settings).
-39. Restaurant manager shall be able to order goods from a warehouse.
-40. Function to create different reports of a restaurant.
-41. Multiple restaurant reports can be combined into a single report.
-42. If an action takes more than a second to respond, a loading alert will appear.
-43. Must be able to send advertisments to patrons via email.
-44. Waiters shall be able to write down customer complaints.
-45. Head waiter shall be able to see customer complaints written by waiters. 
-46. The system shall be able to receive feedback from the customers via email.
-47. The system shall be able to send receipts to the cusomter's email.
-48. The system shall replenish the stock automatically by notifying the warehouse.
-49. The system shall keep track of how many tables are currently available.
-50. The system shall show the most ordered items.
-51. The system shall show the most discounted items.
+1.	The order can be left open.
+2.	The order shall have a financial limit set by the [to be determined].
+3.	An open order can be split into two open orders.
+4.	An order shall have a table number.
+5.	An order shall have a number of guests.
+6.	The restaurant items items are separated into different categories.
+7.	When the client card is used, the order shall be discounted by [set by restaurant manager] before the payment is made.
+8.	The system shall keep a static (same for all restaurants) list of banned people.
+9.	Only the waiters and head waiter shall be able to take orders.
+10.	Payment can be made in multiple smaller different payments. For example half paid by cash and other half by credit card.
+11.	A patron system which shows the list of members with their discount levels.
+12.	The order can become void.
+13.	Voided order shall have a reason for becoming void.
+14.	Cash registers are separated between waiters.
+15.	Head waiter can view and edit waiters work schedule.
+16.	Waiters work schedule is shown as a calendar.
+17.	Waiters work schedule is monthly.
+18.	Head waiter shall be able to look at all open orders.
+19.	A system that receives reservations from the web and stores them into POS. Made reservations is shown as a list.
+20.	The system must support keyboards.
+21.	The system must support touchscreens.
+22.	All widely known credit cards must be supported as a payment method.
+23.	All widely known debit cards must be supported as a payment method.
+24.	Multiple warehouses management must be supported.
+25.	Users can login to the system using a keycard.
+26.	Users can login to the system using a username and a password.
+27.	Only the restaurant manager can change the menu.
+28.	The system must disable ordering items that have run out of stock.
+29.	Restaurant manager shall be able to change menu items prices.
+30.	Only name and contact information is stored in the system about the workers.
+31.	It shall be possible to combine restaurant reports into a single report.
+32.	The system must be in English and in the native language.
+33.	The membership cards are shared across all restaurants.
+34.	Only administrator can change user permissions.
+35.	Waiter shall see overview of all orders. Only open is shown by default.
+36.	Waiter can edit orders.
+37.	Head waiter shall have overview of cash register states.
+38.	Waiters’ bonus calculation based on the monthly income of the restaurant (specified in the settings).
+39.	Restaurant manager shall be able to order goods from a warehouse.
+40.	Function to create different reports of a restaurant.
+41.	Multiple restaurant reports can be combined into a single report.
+42.	If an action takes more than a second to respond, a loading alert will appear.
+43.	Must be able to send advertisements to patrons via email.
+44.	Waiters shall be able to write down customer complaints.
+45.	Head waiter shall be able to see customer complaints written by waiters. 
+46.	The system shall be able to receive feedback from the customers via email.
+47.	The system shall be able to send receipts to the customer's email.
+48.	The system shall replenish the stock automatically by notifying the warehouse.
+49.	The system shall keep track of how many tables are currently available.
+50.	The system shall show the most ordered items.
+51.	The system shall show the most discounted items.
+
 
 ###SMART requirements to usability and performance. 
 
