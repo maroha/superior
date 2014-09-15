@@ -181,54 +181,57 @@ Yes, it should be good.
 
 **Administrator (Back office)**  
 
-1. What is the biggest problem with the current POS?
-Our POS isn't big enough to support our expansion.
-2. Do you want keycard logins or passwords?
-We prefer passwords for everybody, it's cheaper that way.
-3. Who will be having the access to the system to reset the lost passwords? Or will it be automatic?
-It's automatic, via email.
-  * **Veidi arusaamatu küsimus. Kas on nii, et kui kasutaja on oma salasõna unustanud, siis saab selle emailile küsida?**
-4. How much information about your workers you want to include in the system?
-Their name and contact will do.
-  * **Kontonumbrit ei pea teadma?**
-5. What kind of reports do you need?
-The same, as for the manager, but with the opportunity to see total reports on all restaurants, and also to view only a few from them. Also would like to see reportsabout incidents in the restaurants, if there were any.
-6. What kind of information you want included in these reports?
-You can find that from our old POS.
-7. Do you want to get any more rights to your user group other than viewing reports?
-I want to be able to change user group permissions.
-8. How are the waiters and other staff going to use the POS? with their own devices or everybody using the same machine?
-Just one POS machine will do.
-9. How many restaurants you want the POS to have the possibility to handle?
-As we're planning to own 100 restaurants or so, we would like the POS to handle 125.
-10. Will the user interface be translated to the native language or everything will be in english?
-We want native languages supported.
-11. Do the user groups have different rights in different countries/restaurants?
-Nope, everything is the same.
-12. Who manages the system, maintenances etc?
-We have an admin for that.
-13. Do you want your own database?
-Yes. Having to pay fees for using someone else's is not the way to go.
-14. Are you willing to buy new equipment?
+1.	What is the biggest problem with the current POS?
+Our POS isn't good enough to support our expansion.
+2.	Which do you prefer for authentication: keycard or passwords?
+Passwords.
+3.	How many restaurants the POS should be able to handle?
+Must handle at least 125.
+4.	Do the user groups have different rights in different countries/restaurants?
+No.
+5.	Do you want your own database?
+Yes.
+6.	Are you willing to buy new equipment?
 Yes of course, we are willing to invest in a better system, even if it means replacing all the old machines.
-15. Does a regular customer from one country get the discounts if he/she visits you in another country?
+7.	Does a regular customer from one country get the discounts if he/she visits you in another country?
 Yes, we want the membership to be universal.
-16. Do you use gift certificates?
+8.	Do you use gift certificates?
 Yes, but it works like this: A member of our community can open a tab for another person and all that the gift recipient has to do is show up and start ordering.
-17. Do you need sales analysis report?
+9.	Do you need sales analysis report?
 Yes.
-18. Do you need a journal report (order log)?
+10.	Do you need a journal report (order log)?
 Yes.
-19. Do you need a menu usage report?
+11.	Do you need a menu usage report?
 Yes.
-20. What operating system do you prefer?
+12.	What operating system do you prefer?
 We prefer Windows.
-21. Do you want touchscreens or keyboards? Price difference is almost non-existent.
+13.	Do you want touchscreens or keyboards? Price difference is almost non-existent.
 If that is the case, we would like the touchscreen version.
-22. Who would be eligible to promote people inside the system or make any changes to a user's user role?
+14.	Who would be eligible to promote people inside the system or make any changes to a user's user role?
 We'll leave it to the system admins.
-23. Do you want to keep your current user id's that are used at authentication?
-If it doesn't cause any problems, that would be delightful. 
+15.	Do you want to keep your current user id's that are used at authentication?
+If it doesn't cause any problems, that would be delightful.
+What kind of reports do you need?
+The same, as for the manager, but with the opportunity to see total reports on all restaurants, and also to view only a few from them. Also would like to see reports about incidents in the restaurants, if there were any.
+16.	Will the user interface be translated to the native language or everything will be in english?
+We want native languages supported.
+17.	What kind of information you want included in these reports?
+You can find that from our old POS.
+How are the waiters and other staff going to use the POS? with their own devices or everybody using the same machine?
+Just one POS machine will do.
+18.	Do you want to get any more rights to your user group other than viewing reports?
+I want to be able to change user group permissions.
+ * **Kas administratoril ei peaks olema kõik õigused?**
+19.	Who will be having the access to the system to reset the lost passwords? Or will it be automatic?
+It's automatic, via email.
+ * **Veidi arusaamatu küsimus. Kas on nii, et kui kasutaja on oma salasõna unustanud, siis saab selle emailile küsida?**
+20.	How much information about your workers you want to include in the system?
+21.	Their name and contact will do.
+ * **Kontonumbrit ei pea teadma?**
+Who manages the system, maintenances etc?
+We have an admin for that.
+ * **Miks seda küsida on vaja?**
+
 
 ###List of user roles. 
 
