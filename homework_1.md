@@ -16,7 +16,7 @@ Yes.
 Yes.
 7.	Do you record the number of guests in a table?
 Yes.
-8.	Can an order be gifted / on the house?
+8.	Can an order be gifted / be on the house?
 Yes, it can.
 9.	Must an open bill have a limit? If so, will it depend on the client? 
 Limit is 100€ for all clients. It doesn’t depend on the client.
