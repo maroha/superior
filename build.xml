@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="POS_Project" default="build">
+	
+	<!-- Global properties -->
+	<property file="application.properties" />
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="build.classes.dir" value="${build.dir}/classes"/>
+	<property name="dist.dir" value="${build.dir}/jar"/>
+	<property name="conf.dir" value="${basedir}/etc"/>
+	<property name="main.class" value="ee.ut.math.tvt.lihtne.Intro"/>
+	
+	<path id="dist.files">
+		<fileset dir="res"/>
+		<fileset dir="${conf.dir}">
+			<include name="log4j.xml"/>
+		</fileset>
+		<pathelement location="application.properties"/>
+		<pathelement location="version.properties"/>
+		<pathelement location="log4j.xml"/>
+	</path>
+
+	
+	<!-- classpaths -->
+	<!-- <path id="build.classpath">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path> -->
+	
+	<!--<path id="run.classpath">
+		<pathelement location="${build.classes.dir}"/>
+		<pathelement location="${conf.dir}"/>
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>-->
+	
+	<!-- Defined runnable targets -->
+	
+	<!-- Clean the build (deleting build classes dir) -->
+	<target name="clean" description="Cleaning up previous build files">
+		<delete dir="${build.classes.dir}"/>
+	</target>
+	
+	<target name="build" description="Compiling the code and putting files in the right locations">
+		<mkdir dir="${build.classes.dir}"/>
+		<javac 
+			srcdir="${src.dir}" 
+			destdir="${build.classes.dir}"
+			compiler="modern"
+			encoding="utf-8"
+			target="1.8"
+			source="1.8"
+			includeantruntime="false">
+			<classpath>
+				<fileset dir="lib">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+			<!-- <classpath refid="build.classpath"/> -->
+		</javac>
+	</target>
+	
+	<target name="run" depends="build" description="Executing app via class Intro">
+		<java classname="${main.class}" fork="yes">
+			<classpath>
+				<pathelement location="${build.classes.dir}"/>
+				<pathelement location="${conf.dir}"/>
+				<fileset dir="lib">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="dist" depends="build" description="Builds the application as single jar file with all required files">
+		<mkdir dir="${dist.dir}" />
+		<jar 
+			jarfile="${dist.dir}/${team.name}.jar" 
+			basedir="${build.classes.dir}">
+			<zipgroupfileset dir="lib" includes="*.jar" />
+		    <manifest>
+		    	<attribute name="Main-Class" value="${main.class}"/>
+		    </manifest>
+            <!--<fileset dir="${conf.dir}">
+              <include name="log4j.xml"/>
+            </fileset>-->
+			<path refid="dist.files"/>
+		</jar>
+		<propertyfile file="version.properties">
+			<entry key="build.revision.number" type="int" default="0" operation="+"/>
+		</propertyfile>
+	</target>
+	
+	<target name="jrun" depends="dist" description="Run the jar file">
+		<java jar="${dist.dir}/${team.name}.jar" fork="true"/>
+	</target>
+	
+	
+
+
+
+
+
+	
+</project>
