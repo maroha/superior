@@ -1,7 +1,5 @@
-superior
+Tarkvaratehnika POS software
 ========
-
-Tarkvaratehnika POS tarkvara
 
 ### Required libraries
 **[log4j](http://logging.apache.org/log4j/2.x/download.html) (choose one)**  
