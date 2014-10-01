@@ -1,14 +1,8 @@
 package ee.ut.math.tvt.lihtne;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
-
-import org.apache.log4j.Logger;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +16,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import org.apache.log4j.Logger;
+
+import ee.ut.math.tvt.lihtne.util.Util;
+
+/**
+ * Intro window for the lab3 team project.
+ * @author Kevin Nemerzitski
+ */
 public class IntroUI extends Stage {
 	
 	private static Logger log = Logger.getLogger(IntroUI.class);
@@ -46,7 +48,7 @@ public class IntroUI extends Stage {
 	
 	private BorderPane root;
 	
-	//widgets conf
+	//Widgets conf
 	private int teamListCircleRadius = 3;
 	
 	Font font = new Font("Arial", 16);
@@ -68,30 +70,39 @@ public class IntroUI extends Stage {
 		Scene scene = new Scene(root, width, height);
 		setScene(scene);
 		show();	
+		
 		log.info("Intro window has been opened.");
 
 		createWidgets();
 	}
 	
+	/**
+	 * Stage widgets
+	 * Creates team info in vbox, a logo on the right
+	 * and version number on the bottom.
+	 */
 	private void createWidgets(){
 		//team info on the left
 		VBox teamInfo = new VBox();
-
 		root.setLeft(teamInfo);
+		
 		Label teamNameLabel = new Label(namePrefix + teamName);
 		teamNameLabel.setFont(font);
 		teamInfo.getChildren().add(teamNameLabel);
+		
 		Label leaderLabel = new Label(leaderPrefix + leader);
 		leaderLabel.setFont(font);
 		teamInfo.getChildren().add(leaderLabel);
+		
 		Label emailLabel = new Label(emailPrefix + leaderEmail);
 		emailLabel.setFont(font);
 		teamInfo.getChildren().add(emailLabel);
+		
 		Label membersLabel = new Label(memberPrefix);
 		membersLabel.setFont(font);
 		membersLabel.setPadding(membersLabelPadding);
 		teamInfo.getChildren().add(membersLabel);
-
+		
 		for(String name: members){
 			Label l = new Label(name);
 			l.setFont(font);
@@ -100,35 +111,28 @@ public class IntroUI extends Stage {
 		}
 		
 		//logo on the right
-		InputStream imgStream = null;
-		try {
-			imgStream = new FileInputStream(logo);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		InputStream imgStream = Util.getFileInputStream(logo);
 		Image logoImage = new Image(imgStream);
-		
 		ImageView logoView = new ImageView(logoImage);
 		root.setRight(logoView);
 		BorderPane.setMargin(logoView, logoPadding);
 		
-		//version on the bottom
+		//version number on the bottom
 		Label versionLabel = new Label(versionPrefix + version);
-
 		versionLabel.setFont(font);
 		root.setBottom(versionLabel);
 		BorderPane.setAlignment(versionLabel, Pos.BOTTOM_CENTER);
 	}
 
+	/**
+	 * Reads team.name, leader, email, logo and members info
+	 * from the file and stores values to this object.
+	 * @param fileName - app.properties path from basedir
+	 */
 	private void readAppProperties(String fileName){
 		Properties prop = new Properties();
 		
-		InputStream in = null;
-		try {
-			in = new FileInputStream(fileName);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		InputStream in = Util.getFileInputStream(fileName);
 		
 		try {
 			prop.load(in);
@@ -154,15 +158,15 @@ public class IntroUI extends Stage {
 		}
 	}
 	
+	/**
+	 * Reads build revision, minor and major numbers and
+	 * stores value to version variable.
+	 * @param fileName - ver.properties path from basedir
+	 */
 	private void readVerProperties(String fileName){
 		Properties prop = new Properties();
 		
-		InputStream in = null;
-		try {
-			in = new FileInputStream(fileName);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		InputStream in = Util.getFileInputStream(fileName);
 		
 		try {
 			prop.load(in);
@@ -174,21 +178,6 @@ public class IntroUI extends Stage {
 		String min = prop.getProperty("build.minor.number");
 		String maj = prop.getProperty("build.major.number");
 		version = maj + "." + min + "." + rev;
-		
-		prop.setProperty("build.number", version);
-		
-		OutputStream out = null;
-		try {
-			out = new FileOutputStream(fileName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			prop.store(out, "");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 

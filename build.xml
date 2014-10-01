@@ -7,34 +7,29 @@
 	<property name="build.dir" value="${basedir}/build"/>
 	<property name="build.classes.dir" value="${build.dir}/classes"/>
 	<property name="dist.dir" value="${build.dir}/jar"/>
-	<property name="conf.dir" value="${basedir}/etc"/>
+	<property name="conf.dir" value="${basedir}/conf"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
+	<property name="res.dir" value="${basedir}/res"/>
 	<property name="main.class" value="ee.ut.math.tvt.lihtne.Intro"/>
 	
+	<!-- Paths -->
+	<path id="build.classpath">
+	    <fileset id="build.libs" dir="${lib.dir}" includes="*.jar"/>
+	</path>
+	
+	<path id="run.classpath">
+		<pathelement location="${build.classes.dir}"/>
+		<pathelement location="${conf.dir}"/>
+		<path refid="build.classpath"/>
+	</path>
+	
 	<path id="dist.files">
-		<fileset dir="res"/>
 		<fileset dir="${conf.dir}">
-			<include name="log4j.xml"/>
+			<exclude name="*.dtd"/>
 		</fileset>
 		<pathelement location="application.properties"/>
 		<pathelement location="version.properties"/>
-		<pathelement location="log4j.xml"/>
 	</path>
-
-	
-	<!-- classpaths -->
-	<!-- <path id="build.classpath">
-		<fileset dir="lib">
-			<include name="*.jar"/>
-		</fileset>
-	</path> -->
-	
-	<!--<path id="run.classpath">
-		<pathelement location="${build.classes.dir}"/>
-		<pathelement location="${conf.dir}"/>
-		<fileset dir="lib">
-			<include name="*.jar"/>
-		</fileset>
-	</path>-->
 	
 	<!-- Defined runnable targets -->
 	
@@ -43,7 +38,8 @@
 		<delete dir="${build.classes.dir}"/>
 	</target>
 	
-	<target name="build" description="Compiling the code and putting files in the right locations">
+	<!-- Compile the code and put it into ${build.classes.dir}-->
+	<target name="build" description="Compiling the code and putting files in the right location">
 		<mkdir dir="${build.classes.dir}"/>
 		<javac 
 			srcdir="${src.dir}" 
@@ -53,55 +49,51 @@
 			target="1.8"
 			source="1.8"
 			includeantruntime="false">
-			<classpath>
-				<fileset dir="lib">
-					<include name="*.jar"/>
-				</fileset>
-			</classpath>
-			<!-- <classpath refid="build.classpath"/> -->
+				<classpath refid="build.classpath"/>
 		</javac>
 	</target>
 	
+	<!-- Running build using ${main.class} as main class -->
 	<target name="run" depends="build" description="Executing app via class Intro">
 		<java classname="${main.class}" fork="yes">
-			<classpath>
-				<pathelement location="${build.classes.dir}"/>
-				<pathelement location="${conf.dir}"/>
-				<fileset dir="lib">
-					<include name="*.jar"/>
-				</fileset>
-			</classpath>
+			<classpath refid="run.classpath"/>
 		</java>
 	</target>
 	
+	
+	<!-- Creating jar file and putting required files inside -->
 	<target name="dist" depends="build" description="Builds the application as single jar file with all required files">
 		<mkdir dir="${dist.dir}" />
+		<manifestclasspath property="jar.classpath" jarfile="${dist.dir}/${team.name}.jar">
+			<classpath refid="build.classpath"/>
+		</manifestclasspath>
 		<jar 
 			jarfile="${dist.dir}/${team.name}.jar" 
 			basedir="${build.classes.dir}">
-			<zipgroupfileset dir="lib" includes="*.jar" />
+			<zipgroupfileset refid="build.libs" />
+			<zipfileset dir="${res.dir}" includes="*" prefix="res"/>
+			<path refid="dist.files"/>
 		    <manifest>
 		    	<attribute name="Main-Class" value="${main.class}"/>
+		    	<attribute name="Class-Path" value="${jar.classpath}"/>
 		    </manifest>
-            <!--<fileset dir="${conf.dir}">
-              <include name="log4j.xml"/>
-            </fileset>-->
-			<path refid="dist.files"/>
 		</jar>
+			
+		<!-- inc build.revision.number -->
 		<propertyfile file="version.properties">
 			<entry key="build.revision.number" type="int" default="0" operation="+"/>
 		</propertyfile>
+		
+		<!-- update build.number -->
+		<property file="version.properties"/>
+		<propertyfile file="version.properties">
+			<entry key="build.number" value="${build.major.number}.${build.minor.number}.${build.revision.number}"/>
+		</propertyfile>
 	</target>
 	
+	<!-- Running created jar file -->
 	<target name="jrun" depends="dist" description="Run the jar file">
 		<java jar="${dist.dir}/${team.name}.jar" fork="true"/>
 	</target>
-	
-	
-
-
-
-
-
 	
 </project>
