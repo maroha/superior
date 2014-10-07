@@ -12,6 +12,6 @@
 hs_err_pid*
 
 #Eclipse project file
-*.project
 /lib/
 /build/
+/bin/
