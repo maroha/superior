@@ -89,7 +89,6 @@
 	<!-- Running created jar file -->
 	<target name="jrun" depends="dist" description="Run the jar file">
 		<java jar="${dist.dir}/${team.name}.jar" fork="true"/>
-		
 	</target>
 	
 </project>
