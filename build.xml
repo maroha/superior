@@ -60,25 +60,8 @@
 		</java>
 	</target>
 	
-	
 	<!-- Creating jar file and putting required files inside -->
 	<target name="dist" depends="build" description="Builds the application as single jar file with all required files">
-		<mkdir dir="${dist.dir}" />
-		<manifestclasspath property="jar.classpath" jarfile="${dist.dir}/${team.name}.jar">
-			<classpath refid="build.classpath"/>
-		</manifestclasspath>
-		<jar 
-			jarfile="${dist.dir}/${team.name}.jar" 
-			basedir="${build.classes.dir}">
-			<zipgroupfileset refid="build.libs" />
-			<zipfileset dir="${res.dir}" includes="*" prefix="res"/>
-			<path refid="dist.files"/>
-		    <manifest>
-		    	<attribute name="Main-Class" value="${main.class}"/>
-		    	<attribute name="Class-Path" value="${jar.classpath}"/>
-		    </manifest>
-		</jar>
-			
 		<!-- inc build.revision.number -->
 		<propertyfile file="version.properties">
 			<entry key="build.revision.number" type="int" default="0" operation="+"/>
@@ -89,11 +72,24 @@
 		<propertyfile file="version.properties">
 			<entry key="build.number" value="${build.major.number}.${build.minor.number}.${build.revision.number}"/>
 		</propertyfile>
+		
+		<mkdir dir="${dist.dir}" />
+		<jar 
+			jarfile="${dist.dir}/${team.name}.jar" 
+			basedir="${build.classes.dir}">
+			<zipgroupfileset refid="build.libs" />
+			<zipfileset dir="${res.dir}" includes="*" prefix="res"/>
+			<path refid="dist.files"/>
+		    <manifest>
+		    	<attribute name="Main-Class" value="${main.class}"/>
+		    </manifest>
+		</jar>
 	</target>
 	
 	<!-- Running created jar file -->
 	<target name="jrun" depends="dist" description="Run the jar file">
 		<java jar="${dist.dir}/${team.name}.jar" fork="true"/>
+		
 	</target>
 	
 </project>
