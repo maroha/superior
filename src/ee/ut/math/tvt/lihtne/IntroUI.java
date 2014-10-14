@@ -69,7 +69,7 @@ public class IntroUI extends Stage {
 		root.setPadding(rootPadding);
 		Scene scene = new Scene(root, width, height);
 		setScene(scene);
-		show();	
+//		show();	
 		
 		log.info("Intro window has been opened.");
 
