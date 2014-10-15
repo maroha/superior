@@ -2,6 +2,8 @@ package ee.ut.math.tvt.salessystem.ui.panels;
 
 import java.util.NoSuchElementException;
 
+import org.controlsfx.dialog.Dialogs;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -130,9 +132,11 @@ public class PurchaseItemPanel extends GridPane {
 
 			@Override
 			public void handle(ActionEvent event) {
-				StockItem item = productsComboBox.getSelectionModel().getSelectedItem();
-				barCodeField.setText(String.valueOf(item.getId()));
-				fillDialogFields();
+				if(!productsComboBox.getSelectionModel().isEmpty()){
+					StockItem item = productsComboBox.getSelectionModel().getSelectedItem();
+					barCodeField.setText(String.valueOf(item.getId()));
+					fillDialogFields();
+				}
 			}});
         
         // Fill the dialog fields if the bar code text field loses focus
@@ -220,13 +224,31 @@ public class PurchaseItemPanel extends GridPane {
     public void addItemEventHandler() {
         // add chosen item to the shopping cart.
         StockItem stockItem = getStockItemByBarcode();
-        if (stockItem != null) {
             int quantity;
             try {
                 quantity = Integer.parseInt(quantityField.getText());
             } catch (NumberFormatException ex) {
                 quantity = 1;
             }
+            if (stockItem != null) {
+            	if(stockItem.getQuantity() < quantity){
+            		System.out.println("out of stock");
+            		
+            		String msg = "Warehouse only has " + stockItem.getQuantity() + " " + stockItem.getName() + ".";
+            		if(stockItem.getQuantity() == 0)
+            			msg = "Warehouse has no " + stockItem.getName() + ".";
+            		
+            		Dialogs.create()
+            		.lightweight()
+            			.owner(root)
+            			.title("Warning")
+            			.masthead("Not enough stock!")
+            			.message(msg)
+            			.showWarning();
+            		
+            		return;
+            	}
+            
             model.getCurrentPurchaseTableModel()
                 .addItem(new SoldItem(stockItem, quantity));
         }
@@ -251,6 +273,7 @@ public class PurchaseItemPanel extends GridPane {
         quantityField.setText("1");
         nameField.setText("");
         priceField.setText("");
+        this.productsComboBox.getSelectionModel().clearSelection();
     }
 
 }

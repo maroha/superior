@@ -32,16 +32,20 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
         TableColumn<SoldItem, String> nameCol = new TableColumn<SoldItem, String>("Name");
         nameCol.setCellValueFactory(new PropertyValueFactory<SoldItem,String>("name"));
         
-        TableColumn<SoldItem, Integer> priceCol = new TableColumn<SoldItem, Integer>("Price");
-        priceCol.setCellValueFactory(new PropertyValueFactory<SoldItem,Integer>("price"));
+        TableColumn<SoldItem, Double> priceCol = new TableColumn<SoldItem, Double>("Price");
+        priceCol.setCellValueFactory(new PropertyValueFactory<SoldItem,Double>("price"));
         
         TableColumn<SoldItem, Integer> quantityCol = new TableColumn<SoldItem, Integer>("Quantity");
         quantityCol.setCellValueFactory(new PropertyValueFactory<SoldItem,Integer>("quantity"));
+        
+        TableColumn<SoldItem, Double> sumCol = new TableColumn<SoldItem, Double>("Sum");
+        sumCol.setCellValueFactory(new PropertyValueFactory<SoldItem,Double>("sum"));
         
         columnList.add(idCol);
         columnList.add(nameCol);
         columnList.add(priceCol);
         columnList.add(quantityCol);
+        columnList.add(sumCol);
         
         return columnList;
     }
