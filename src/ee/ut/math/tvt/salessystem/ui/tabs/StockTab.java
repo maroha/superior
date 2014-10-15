@@ -1,10 +1,34 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
+import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
+import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
-import java.awt.Color;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemTableModel;
+
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -12,84 +36,89 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
+import com.sun.javafx.collections.ObservableListWrapper;
 
-public class StockTab {
+public class StockTab extends Tab {
 
-  private JButton addItem;
+	private Button addItem;
 
-  private SalesSystemModel model;
+	private SalesSystemModel model;
 
-  public StockTab(SalesSystemModel model) {
-    this.model = model;
-  }
+	public StockTab(SalesSystemModel model) {
+		this.model = model;
+	}
 
-  // warehouse stock tab - consists of a menu and a table
-  public Component draw() {
-    JPanel panel = new JPanel();
-    panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	// warehouse stock tab - consists of a menu and a table
+	public Node draw() {
+		GridPane panel = new GridPane();
+		panel.setBorder(new Border(new BorderStroke(Color.BLACK,
+				BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+				BorderWidths.DEFAULT)));
 
-    GridBagLayout gb = new GridBagLayout();
-    GridBagConstraints gc = new GridBagConstraints();
-    panel.setLayout(gb);
+		panel.add(drawStockMenuPane(), 0, 0);
 
-    gc.fill = GridBagConstraints.HORIZONTAL;
-    gc.anchor = GridBagConstraints.NORTH;
-    gc.gridwidth = GridBagConstraints.REMAINDER;
-    gc.weightx = 1.0d;
-    gc.weighty = 0d;
+		panel.add(drawStockMainPane(), 0, 1);
+		return panel;
+	}
 
-    panel.add(drawStockMenuPane(), gc);
+	// warehouse menu
+	private Node drawStockMenuPane() {
+		GridPane panel = new GridPane();
+		panel.setPadding(new Insets(1));
+		panel.setBorder(new Border(new BorderStroke(Color.BLACK,
+				BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+				BorderWidths.DEFAULT)));
 
-    gc.weighty = 1.0;
-    gc.fill = GridBagConstraints.BOTH;
-    panel.add(drawStockMainPane(), gc);
-    return panel;
-  }
+		addItem = new Button("Add");
 
-  // warehouse menu
-  private Component drawStockMenuPane() {
-    JPanel panel = new JPanel();
+		panel.add(addItem, 0, 0);
 
-    GridBagConstraints gc = new GridBagConstraints();
-    GridBagLayout gb = new GridBagLayout();
+		return panel;
+	}
 
-    panel.setLayout(gb);
+	// table of the wareshouse stock
+	private Node drawStockMainPane() {
+		GridPane panel = new GridPane();
+		panel.setPadding(Insets.EMPTY);
 
-    gc.anchor = GridBagConstraints.NORTHWEST;
-    gc.weightx = 0;
+		TitledPane titledPanel = new TitledPane("Warehouse status", panel);
+		titledPanel.setPadding(new Insets(2, 0, 0, 0));
+		titledPanel.setCollapsible(false);
 
-    addItem = new JButton("Add");
-    gc.gridwidth = GridBagConstraints.RELATIVE;
-    gc.weightx = 1.0;
-    panel.add(addItem, gc);
+		TableView<StockItem> table = new TableView<StockItem>(
+				model.getWarehouseTableModel());
+		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		SalesSystemTableModel<StockItem> tableModel = ((SalesSystemTableModel<StockItem>) table
+				.getItems());
+		table.getColumns().addAll(tableModel.getTableColumns());
 
-    panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-    return panel;
-  }
+		// disable column dragging
+		table.getColumns().addListener(
+				new ListChangeListener<TableColumn<StockItem, ?>>() {
 
+					public boolean suspended;
 
-  // table of the wareshouse stock
-  private Component drawStockMainPane() {
-    JPanel panel = new JPanel();
+					@Override
+					public void onChanged(
+							Change<? extends TableColumn<StockItem, ?>> c) {
+						c.next();
+						if (c.wasReplaced() && !suspended) {
+							this.suspended = true;
+							table.getColumns().setAll(
+									tableModel.getTableColumns());
+							this.suspended = false;
+						}
+					}
+				});
+		
+		TabPane root = getTabPane();
 
-    JTable table = new JTable(model.getWarehouseTableModel());
+		table.prefWidthProperty().bind(root.widthProperty());
+		table.prefHeightProperty().bind(root.heightProperty());
 
-    JTableHeader header = table.getTableHeader();
-    header.setReorderingAllowed(false);
+		panel.add(table, 0, 1);
 
-    JScrollPane scrollPane = new JScrollPane(table);
-
-    GridBagConstraints gc = new GridBagConstraints();
-    GridBagLayout gb = new GridBagLayout();
-    gc.fill = GridBagConstraints.BOTH;
-    gc.weightx = 1.0;
-    gc.weighty = 1.0;
-
-    panel.setLayout(gb);
-    panel.add(scrollPane, gc);
-
-    panel.setBorder(BorderFactory.createTitledBorder("Warehouse status"));
-    return panel;
-  }
+		return titledPanel;
+	}
 
 }

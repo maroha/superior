@@ -1,90 +1,106 @@
 package ee.ut.math.tvt.salessystem.ui;
 
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import javax.swing.JTabbedPane;
+
+import org.apache.log4j.Logger;
+
+import ee.ut.math.tvt.lihtne.util.Util;
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.StockTab;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import org.apache.log4j.Logger;
 
 /**
  * Graphical user interface of the sales system.
  */
-public class SalesSystemUI extends JFrame {
+public class SalesSystemUI extends Stage {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  private static final Logger log = Logger.getLogger(SalesSystemUI.class);
+	private static final Logger log = Logger.getLogger(SalesSystemUI.class);
 
-  private final SalesDomainController domainController;
+	private final SalesDomainController domainController;
 
-  // Warehouse model
-  private SalesSystemModel model;
+	// Warehouse model
+	private SalesSystemModel model;
 
-  // Instances of tab classes
-  private PurchaseTab purchaseTab;
-  private HistoryTab historyTab;
-  private StockTab stockTab;
+	// Instances of tab classes
+	private PurchaseTab purchaseTab;
+	private HistoryTab historyTab;
+	private StockTab stockTab;
 
-  /**
-   * Constructs sales system GUI.
-   * @param domainController Sales domain controller.
-   */
-  public SalesSystemUI(SalesDomainController domainController) {
-    this.domainController = domainController;
-    this.model = new SalesSystemModel(domainController);
+	/**
+	 * Constructs sales system GUI.
+	 * 
+	 * @param domainController
+	 *            Sales domain controller.
+	 */
+	public SalesSystemUI(SalesDomainController domainController) {
+		this.domainController = domainController;
+		this.model = new SalesSystemModel(domainController);
 
-    // Create singleton instances of the tab classes
-    historyTab = new HistoryTab();
-    stockTab = new StockTab(model);
-    purchaseTab = new PurchaseTab(domainController, model);
+		// Create singleton instances of the tab classes
+		historyTab = new HistoryTab();
+		stockTab = new StockTab(model);
+		purchaseTab = new PurchaseTab(domainController, model);
 
-    setTitle("Sales system");
+		setTitle("Sales system");
 
-    // set L&F to the nice Windows style
-    try {
-      UIManager.setLookAndFeel(new WindowsLookAndFeel());
+		// size & location
+		int width = 600;
+		int height = 400;
+		setWidth(width);
+		setHeight(height);
 
-    } catch (UnsupportedLookAndFeelException e1) {
-      log.warn(e1.getMessage());
-    }
+		drawWidgets();
 
-    drawWidgets();
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setX((screen.width - width) / 2);
+		setY((screen.height - height) / 2);
 
-    // size & location
-    int width = 600;
-    int height = 400;
-    setSize(width, height);
-    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    setLocation((screen.width - width) / 2, (screen.height - height) / 2);
+		setOnHiding(new EventHandler<WindowEvent>() {
 
-    addWindowListener(new WindowAdapter() {
-      @Override
-      public void windowClosing(WindowEvent e) {
-        System.exit(0);
-      }
-    });
-  }
+			@Override
+			public void handle(WindowEvent event) {
+				System.exit(0);
+			   }
+		});
 
-  private void drawWidgets() {
-    JTabbedPane tabbedPane = new JTabbedPane();
+	}
 
-    tabbedPane.add("Point-of-sale", purchaseTab.draw());
-    tabbedPane.add("Warehouse", stockTab.draw());
-    tabbedPane.add("History", historyTab.draw());
+	private void drawWidgets() 	{
+		TabPane root = new TabPane();
+		root.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE); //disable tab closing
 
-    getContentPane().add(tabbedPane);
-  }
+		Scene scene = new Scene(root, 0, 0); //width, height are set from content
+		
+		setScene(scene);
+
+		purchaseTab.setText("Point-of-sale");
+		stockTab.setText("Warehouse");
+		historyTab.setText("History");
+
+		root.getTabs().addAll(purchaseTab, stockTab, historyTab);
+
+		purchaseTab.setContent(purchaseTab.draw());
+		stockTab.setContent(stockTab.draw());
+		historyTab.setContent(historyTab.draw());
+	}
 
 }
-
-

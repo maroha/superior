@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -15,27 +16,28 @@ import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.controller.impl.SalesDomainControllerImpl;
 import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
 import ee.ut.math.tvt.salessystem.ui.SalesSystemUI;
+
 /**
- * MAIN CLASS
- * Starts JavaFX application and initializes IntroUI stage.
+ * MAIN CLASS Starts JavaFX application and initializes IntroUI stage.
+ * 
  * @author Kevin Nemerzitski
  */
-public class Intro extends Application{
-	
+public class Intro extends Application {
+
 	private static final Logger log = Logger.getLogger(Intro.class);
 	private static final String MODE = "console";
-	
-	private static String[] args;
-	
+
+	private int introDuration = 0; // milliseconds, 0 - disabled
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		try{
+		try {
 			List<String> params = getParameters().getRaw();
 			String[] args = new String[params.size()];
 			params.toArray(args);
-			
+
 			final SalesDomainController domainController = new SalesDomainControllerImpl();
-			
+
 			if (args.length == 1 && args[0].equals(MODE)) {
 				log.debug("Mode: " + MODE);
 
@@ -45,27 +47,31 @@ public class Intro extends Application{
 
 				IntroUI introUI = new IntroUI();
 				introUI.initModality(Modality.APPLICATION_MODAL);
-				introUI.show();
-//				introUI.setAlwaysOnTop(true); jdk1.8.0_20 needed
-				new Timeline(new KeyFrame(
-						Duration.millis(3000), 
-						action -> introUI.hide()))
-				.play();
-				
+
+				introUI.setAlwaysOnTop(true);
+
 				// TODO - convert userinterface from jswing to javafx
 				final SalesSystemUI ui = new SalesSystemUI(domainController);
-				ui.show();
+
+				if (introDuration > 0) {
+					introUI.show();
+					new Timeline(new KeyFrame(Duration.millis(introDuration),
+							action -> {
+								introUI.hide();
+								ui.show();
+							})).play();
+				} else
+					ui.show();
 
 			}
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		launch(args);
 	}
-
 
 }

@@ -1,9 +1,17 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
+
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.apache.log4j.Logger;
 
+import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**
@@ -15,8 +23,33 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	private static final Logger log = Logger.getLogger(StockTableModel.class);
 
 	public StockTableModel() {
-		super(new String[] {"Id", "Name", "Price", "Quantity"});
+		super(defineTableColumns());
 	}
+	
+    public static List<TableColumn<StockItem, ?>> defineTableColumns(){
+    	List<TableColumn<StockItem, ?>> columnList = new ArrayList<TableColumn<StockItem, ?>>();
+    	
+        TableColumn<StockItem, Integer> idCol = new TableColumn<StockItem, Integer>("Id");
+        idCol.setCellValueFactory(new PropertyValueFactory<StockItem,Integer>("id"));
+        
+        
+        TableColumn<StockItem, String> nameCol = new TableColumn<StockItem, String>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<StockItem,String>("name"));
+        
+        TableColumn<StockItem, Integer> priceCol = new TableColumn<StockItem, Integer>("Price");
+        priceCol.setCellValueFactory(new PropertyValueFactory<StockItem,Integer>("price"));
+        
+        TableColumn<StockItem, Integer> quantityCol = new TableColumn<StockItem, Integer>("Quantity");
+        quantityCol.setCellValueFactory(new PropertyValueFactory<StockItem,Integer>("quantity"));
+        
+        columnList.add(idCol);
+        columnList.add(nameCol);
+        columnList.add(priceCol);
+        columnList.add(quantityCol);
+        
+        return columnList;
+    }
+
 
 	@Override
 	protected Object getColumnValue(StockItem item, int columnIndex) {
@@ -46,28 +79,28 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 					+ " increased quantity by " + stockItem.getQuantity());
 		}
 		catch (NoSuchElementException e) {
-			rows.add(stockItem);
+			add(stockItem);
 			log.debug("Added " + stockItem.getName()
 					+ " quantity of " + stockItem.getQuantity());
 		}
-		fireTableDataChanged();
 	}
 
 	@Override
 	public String toString() {
 		final StringBuffer buffer = new StringBuffer();
 
-		for (int i = 0; i < headers.length; i++)
-			buffer.append(headers[i] + "\t");
+		for (int i = 0; i < headers.size(); i++)
+			buffer.append(headers.get(i).getText() + "\t");
 		buffer.append("\n");
-
-		for (final StockItem stockItem : rows) {
+    	ListIterator<StockItem> itr = listIterator();
+    	while(itr.hasNext()){
+    		final StockItem stockItem = itr.next();
 			buffer.append(stockItem.getId() + "\t");
 			buffer.append(stockItem.getName() + "\t");
 			buffer.append(stockItem.getPrice() + "\t");
 			buffer.append(stockItem.getQuantity() + "\t");
 			buffer.append("\n");
-		}
+    	}
 
 		return buffer.toString();
 	}

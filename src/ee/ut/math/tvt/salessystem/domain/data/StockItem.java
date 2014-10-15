@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
+
 /**
  * Stock item. Corresponds to the Data Transfer Object design pattern.
  */

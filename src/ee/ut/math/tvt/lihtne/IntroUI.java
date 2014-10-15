@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.lihtne;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -63,12 +65,20 @@ public class IntroUI extends Stage {
 		readAppProperties(appProperties);
 		readVerProperties(verProperties);
 		
+		//center the stage
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setX((screen.width - width) / 2);
+		setY((screen.height - height) / 2);
+		
 		//window creation
 		setTitle(windowTitle);
 		root = new BorderPane();
 		root.setPadding(rootPadding);
 		Scene scene = new Scene(root, width, height);
 		setScene(scene);
+		
+
+		
 //		show();	
 		
 		log.info("Intro window has been opened.");
