@@ -7,19 +7,27 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemTableModel;
 
 /**
  * Purchase pane + shopping cart tabel UI.
@@ -30,6 +38,7 @@ public class PurchaseItemPanel extends GridPane {
 
     // Text field on the dialogPane
     private TextField barCodeField;
+    private ComboBox<StockItem> productsComboBox;
 	private TextField quantityField;
     private TextField nameField;
     private TextField priceField;
@@ -91,6 +100,7 @@ public class PurchaseItemPanel extends GridPane {
 
         // Create the panel
     	GridPane panel = new GridPane();
+    	//panel.setStyle("-fx-grid-lines-visible: true;");
     	
     	panel.setPadding(new Insets(4));
     	ColumnConstraints column2 = new ColumnConstraints();
@@ -98,16 +108,32 @@ public class PurchaseItemPanel extends GridPane {
     	panel.getColumnConstraints().addAll(new ColumnConstraints(), column2);
 		
 		TitledPane titledPanel = new TitledPane("Product", panel);
-		
 		titledPanel.setPadding(new Insets(4,0,0,0));
 		GridPane.setFillWidth(titledPanel, false);
 		titledPanel.setCollapsible(false);
 		
+		//create product combobox
+		SalesSystemTableModel<StockItem> warehouseList = model.getWarehouseTableModel();
+		
+		productsComboBox = new ComboBox<StockItem>(warehouseList);
+		productsComboBox.setMinHeight(24);
+        GridPane.setMargin(productsComboBox, new Insets(0,0,5,0));
+
         // Initialize the textfields
         barCodeField = new TextField();
+
 		quantityField = new TextField("1");
         nameField = new TextField();
         priceField = new TextField();
+        
+        productsComboBox.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				StockItem item = productsComboBox.getSelectionModel().getSelectedItem();
+				barCodeField.setText(String.valueOf(item.getId()));
+				fillDialogFields();
+			}});
         
         // Fill the dialog fields if the bar code text field loses focus
         barCodeField.focusedProperty().addListener(new ChangeListener<Boolean>(){
@@ -129,21 +155,23 @@ public class PurchaseItemPanel extends GridPane {
         // == Add components to the panel
 
         // - bar code
+        panel.add(productsComboBox, 0, 0, 2, 1);
+        
         Label barCodeLabel = new Label("Bar code:");
-        panel.add(barCodeLabel, 0, 0);
-        panel.add(barCodeField, 1, 0);
+        panel.add(barCodeLabel, 0, 1);
+        panel.add(barCodeField, 1, 1);
 
         // - amount
-        panel.add(new Label("Amount:"), 0, 1);
-        panel.add(quantityField, 1, 1);
+        panel.add(new Label("Amount:"), 0, 2);
+        panel.add(quantityField, 1, 2);
 
         // - name
-        panel.add(new Label("Name:"), 0, 2);
-        panel.add(nameField, 1, 2);
+        panel.add(new Label("Name:"), 0, 3);
+        panel.add(nameField, 1, 3);
 
         // - price
-        panel.add(new Label("Price:"), 0, 3);
-        panel.add(priceField, 1, 3);
+        panel.add(new Label("Price:"), 0, 4);
+        panel.add(priceField, 1, 4);
 
         // Create and add the button
         addItemButton = new Button("Add to cart");
@@ -156,7 +184,7 @@ public class PurchaseItemPanel extends GridPane {
 		});
 
         panel.add(addItemButton, 0, 5);
-        
+
         return titledPanel;
     }
 
@@ -211,6 +239,7 @@ public class PurchaseItemPanel extends GridPane {
         this.addItemButton.setDisable(!enabled);
         this.barCodeField.setDisable(!enabled);
         this.quantityField.setDisable(!enabled);
+        this.productsComboBox.setDisable(!enabled);
     }
 
 

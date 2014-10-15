@@ -26,8 +26,11 @@ public class ConsoleUI {
 	private List<StockItem> cart;
 
 	private List<StockItem> warehouse;
+	
+	private static boolean consoleCreated;
 
 	public ConsoleUI(SalesDomainController domainController) {
+		consoleCreated = true;
 		this.dc = domainController;
 
 		cart = new ArrayList<StockItem>();
@@ -136,6 +139,10 @@ public class ConsoleUI {
 			item.setQuantity(Math.min(amount, item.getQuantity()));
 			cart.add(item);
 		}
+	}
+	
+	public static boolean isConsoleMode(){
+		return consoleCreated;
 	}
 	
 }

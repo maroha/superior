@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
+import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
+
 
 /**
  * Stock item. Corresponds to the Data Transfer Object design pattern.
@@ -85,7 +87,10 @@ public class StockItem implements Cloneable, DisplayableItem {
     }
 
     public String toString() {
-        return id + " " + name + " " + description + " " + price;
+    	if(ConsoleUI.isConsoleMode())
+    		return id + " " + name + " " + description + " " + price;
+    	else
+    		return name;
     }
 
     /**
