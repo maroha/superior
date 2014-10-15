@@ -6,12 +6,10 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.apache.log4j.Logger;
 
-import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**

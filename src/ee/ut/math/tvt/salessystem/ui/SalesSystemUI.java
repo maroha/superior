@@ -3,23 +3,14 @@ package ee.ut.math.tvt.salessystem.ui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import javax.swing.JTabbedPane;
-
 import org.apache.log4j.Logger;
 
-import ee.ut.math.tvt.lihtne.util.Util;
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;

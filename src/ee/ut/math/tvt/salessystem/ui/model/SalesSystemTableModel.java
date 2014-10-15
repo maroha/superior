@@ -6,16 +6,10 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import javax.swing.table.AbstractTableModel;
 
 import com.sun.javafx.collections.ObservableListWrapper;
 
 import ee.ut.math.tvt.salessystem.domain.data.DisplayableItem;
-import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
-import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**
  * Generic table model implementation suitable for extending.
