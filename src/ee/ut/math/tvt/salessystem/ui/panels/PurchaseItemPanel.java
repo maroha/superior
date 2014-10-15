@@ -2,29 +2,26 @@ package ee.ut.math.tvt.salessystem.ui.panels;
 
 import java.util.NoSuchElementException;
 
-import org.controlsfx.dialog.Dialogs;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+
+import org.apache.log4j.Logger;
+import org.controlsfx.dialog.Dialogs;
+
+import ee.ut.math.tvt.lihtne.Intro;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
@@ -38,6 +35,8 @@ public class PurchaseItemPanel extends GridPane {
 
     private static final long serialVersionUID = 1L;
 
+	private static final Logger log = Logger.getLogger(Intro.class);
+    
     // Text field on the dialogPane
     private TextField barCodeField;
     private ComboBox<StockItem> productsComboBox;
@@ -221,7 +220,8 @@ public class PurchaseItemPanel extends GridPane {
     /**
      * Add new item to the cart.
      */
-    public void addItemEventHandler() {
+    @SuppressWarnings("deprecation")
+	public void addItemEventHandler() {
         // add chosen item to the shopping cart.
         StockItem stockItem = getStockItemByBarcode();
             int quantity;
@@ -231,8 +231,15 @@ public class PurchaseItemPanel extends GridPane {
                 quantity = 1;
             }
             if (stockItem != null) {
-            	if(stockItem.getQuantity() < quantity){
-            		System.out.println("out of stock");
+            	//check if same item has already been added
+            	int prevQuantity = 0;
+            	for(SoldItem soldItem : model.getCurrentPurchaseTableModel()){
+            		if(soldItem.getStockItem().equals(stockItem)){
+            			prevQuantity += soldItem.getQuantity();
+            		}
+            	}
+            	if(stockItem.getQuantity() < quantity+prevQuantity){
+            		log.warn("Out of stock.");
             		
             		String msg = "Warehouse only has " + stockItem.getQuantity() + " " + stockItem.getName() + ".";
             		if(stockItem.getQuantity() == 0)
@@ -248,7 +255,7 @@ public class PurchaseItemPanel extends GridPane {
             		
             		return;
             	}
-            
+
             model.getCurrentPurchaseTableModel()
                 .addItem(new SoldItem(stockItem, quantity));
         }

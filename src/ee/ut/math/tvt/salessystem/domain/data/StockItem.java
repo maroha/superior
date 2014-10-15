@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
 
 
@@ -16,7 +17,8 @@ public class StockItem implements Cloneable, DisplayableItem {
 
     private String description;
     
-    private int quantity;
+    //private int quantity;
+    private SimpleIntegerProperty quantity;
 
     /**
      * Constucts new <code>StockItem</code> with the specified values.
@@ -37,7 +39,8 @@ public class StockItem implements Cloneable, DisplayableItem {
         this.name = name;
         this.description = desc;
         this.price = price;
-        this.quantity = quantity;
+//        this.quantity = quantity;
+        this.quantity = new SimpleIntegerProperty(quantity);
     }
 
     /**
@@ -79,11 +82,16 @@ public class StockItem implements Cloneable, DisplayableItem {
     }
     
     public int getQuantity() {
-        return quantity;
+        return quantity.get();
     }
+    
+    public SimpleIntegerProperty quantityProperty() {
+		return quantity;
+	}
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        //this.quantity = quantity;
+    	this.quantity.set(quantity);
     }
 
     public String toString() {
@@ -103,7 +111,7 @@ public class StockItem implements Cloneable, DisplayableItem {
             case 0: return id;
             case 1: return name;
             case 2: return new Double(price);
-            case 3: return new Integer(quantity);
+            case 3: return new Integer(quantity.get());
             default: throw new RuntimeException("invalid column!");
         }
     }

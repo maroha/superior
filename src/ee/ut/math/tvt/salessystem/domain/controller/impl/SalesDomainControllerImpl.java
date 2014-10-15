@@ -14,9 +14,13 @@ import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
 public class SalesDomainControllerImpl implements SalesDomainController {
 	
 	public void submitCurrentPurchase(List<SoldItem> goods) throws VerificationFailedException {
+		for(SoldItem soldItem: goods){
+			StockItem stockItem = soldItem.getStockItem();
+			stockItem.setQuantity(stockItem.getQuantity() - soldItem.getQuantity());
+		}
 		// Let's assume we have checked and found out that the buyer is underaged and
 		// cannot buy chupa-chups
-		throw new VerificationFailedException("Underaged!");
+		//throw new VerificationFailedException("Underaged!");
 		// XXX - Save purchase
 	}
 
