@@ -98,7 +98,7 @@
 		</java>
 	</target>
 
-	<!--Commit command -->
+	<!--Defining git macro -->
 	 <macrodef name="git">
 		<attribute name="command" />
 		<attribute name="options" default="" />
@@ -113,6 +113,7 @@
 		</sequential>
 	</macrodef>
 	
+	<!-- Git commit command -->
 	<target name="git_commit" description="Commits all changes to version git.">
 		<input message="Commit message" addproperty="commit-message" />
 		<input message="Username" addproperty="username" />
@@ -126,12 +127,38 @@
 		</git>
 		<git command="commit">
 			<args>
-				<arg value="-m ${commit-message}" />
+				<arg value="-m" />
+				<arg value="${commit-message" />
+				}
 			</args>
 		</git>
 		<git command="push">
 			<args>
 				<arg value="https://${username}:${password}@github.com/maroha/superior.git" />
+			</args>
+		</git>
+	</target>	
+	
+	<!-- Git tag command -->
+	<target name="git_tag" description="Commits all changes to version git.">
+		<input message="Tag name" addproperty="tag-name" />
+		<input message="Tag comment" addproperty="comment" />
+		<input message="Username" addproperty="username" />
+		<input message="Password" addproperty="password" />
+		
+		<echo message="Creating tag ${tag-name} with comment ${comment}" />
+		<git command="tag">
+			<args>
+				<arg value="-a" />
+				<arg value="${tag-name}" />
+				<arg value="-m" />
+				<arg value="${comment}" />
+			</args>
+		</git>
+		<git command="push">
+			<args>
+				<arg value="https://${username}:${password}@github.com/maroha/superior.git" />
+				<arg value="--tags" />
 			</args>
 		</git>
 	</target>	
