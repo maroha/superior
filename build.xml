@@ -55,9 +55,11 @@
 	
 	<!-- Running build using ${main.class} as main class -->
 	<target name="run" depends="build" description="Executing app via class Intro">
-		<java classname="${main.class}" fork="yes">
-			<classpath refid="run.classpath"/>
-		</java>
+	    <java classname="${main.class}" fork="yes">
+	    	  <classpath refid="run.classpath"/>
+	          <jvmarg value="-Xdebug" />
+	          <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+	    </java>
 	</target>
 	
 	<!-- Creating jar file and putting required files inside -->

@@ -99,4 +99,14 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
         log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
     
+    public double getSum(){
+    	double sum = 0;
+		ListIterator<SoldItem> itr = listIterator();
+		while(itr.hasNext()){
+			final SoldItem item = itr.next();
+			sum += item.getSum();
+		}
+		return sum;
+    }
+    
 }
