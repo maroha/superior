@@ -69,7 +69,6 @@ public class PurchaseItemPanel extends GridPane {
 
     // shopping cart pane
     private Node drawBasketPane() {
-    	
         // Create the basketPane
         GridPane basketPane = new GridPane();
         basketPane.setPadding(Insets.EMPTY);

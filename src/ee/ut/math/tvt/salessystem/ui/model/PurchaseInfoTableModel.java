@@ -109,4 +109,8 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		return sum;
     }
     
+    public List<SoldItem> getItems(){
+		return new ArrayList<SoldItem>(this);
+    }
+    
 }

@@ -25,6 +25,7 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.panels.PurchaseItemPanel;
@@ -46,6 +47,9 @@ public class PurchaseTab extends Tab {
 	private Button cancelPurchase;
 
 	private PurchaseItemPanel purchasePane;
+	
+	private GridPane confirmPane;
+	private Label sumValue;
 
 	private SalesSystemModel model;
 
@@ -72,6 +76,44 @@ public class PurchaseTab extends Tab {
 		// Add the main purchase-panel
 		purchasePane = new PurchaseItemPanel(model, getTabPane());
 		panel.add(purchasePane, 0, 1);
+		
+		
+		//purchase confirmation pane
+		confirmPane = new GridPane();
+
+		sumValue = new Label(
+				String.valueOf(model.getCurrentPurchaseTableModel().getSum()));
+		Label changeValue = new Label("0");
+		TextField payAmount = new TextField("0");
+		payAmount.textProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				double paymentAmount = 0;
+				
+				if(!newValue.isEmpty()){ //check new value
+					if(newValue.endsWith("f") || newValue.endsWith("d")){
+						payAmount.setText(oldValue);
+						return;
+					}
+					newValue = newValue.replaceAll(",", ".");	
+					try{
+						paymentAmount = Double.parseDouble(newValue);
+					}catch(Exception e){
+						payAmount.setText(oldValue);
+						return;
+					}
+				}
+				changeValue.setText(String.valueOf(
+						paymentAmount - Double.valueOf(sumValue.getText())));
+			}
+		});
+		
+		confirmPane.add(new HBox(new Label("Order sum: "), sumValue), 0, 0);
+		confirmPane.add(new HBox(new Label("Change: "), changeValue), 0, 1);
+		confirmPane.add(new HBox(new Label("Payment amount: "), payAmount), 0, 2);
+		
 
 		return panel;
 	}
@@ -170,41 +212,7 @@ public class PurchaseTab extends Tab {
 	/** Event handler for the <code>submit purchase</code> event. */
 	@SuppressWarnings("deprecation")
 	protected void submitPurchaseButtonClicked() {
-		//additional screen
-		GridPane confirmPane = new GridPane();
-
-		Label sumValue = new Label(
-				String.valueOf(model.getCurrentPurchaseTableModel().getSum()));
-		Label changeValue = new Label("0");
-		TextField payAmount = new TextField("0");
-		payAmount.textProperty().addListener(new ChangeListener<String>(){
-
-			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
-				double paymentAmount = 0;
-				
-				if(!newValue.isEmpty()){ //check new value
-					if(newValue.endsWith("f") || newValue.endsWith("d")){
-						payAmount.setText(oldValue);
-						return;
-					}
-					newValue = newValue.replaceAll(",", ".");	
-					try{
-						paymentAmount = Double.parseDouble(newValue);
-					}catch(Exception e){
-						payAmount.setText(oldValue);
-						return;
-					}
-				}
-				changeValue.setText(String.valueOf(
-						paymentAmount - Double.valueOf(sumValue.getText())));
-			}
-		});
-		
-		confirmPane.add(new HBox(new Label("Order sum: "), sumValue), 0, 0);
-		confirmPane.add(new HBox(new Label("Change: "), changeValue), 0, 1);
-		confirmPane.add(new HBox(new Label("Payment amount: "), payAmount), 0, 2);
+		sumValue.setText(String.valueOf(model.getCurrentPurchaseTableModel().getSum()));
 		
 		Action response = Dialogs.create()
 		.title("Payment Confirmation")
@@ -220,6 +228,12 @@ public class PurchaseTab extends Tab {
 				domainController.submitCurrentPurchase(model
 						.getCurrentPurchaseTableModel());
 				endSale();
+				
+				AcceptedOrder newAccpetedOrder = 
+						new AcceptedOrder(model.getCurrentPurchaseTableModel().getItems());
+				
+				model.getPurchaseHistoryTableModel().add(newAccpetedOrder);
+				
 				model.getCurrentPurchaseTableModel().clear();
 			} catch (VerificationFailedException e1) {
 				log.error(e1.getMessage());
