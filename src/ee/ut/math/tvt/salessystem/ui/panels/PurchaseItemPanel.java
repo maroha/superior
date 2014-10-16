@@ -245,7 +245,6 @@ public class PurchaseItemPanel extends GridPane {
             			msg = "Warehouse has no " + stockItem.getName() + ".";
             		
             		Dialogs.create()
-            		.lightweight()
             			.owner(root)
             			.title("Warning")
             			.masthead("Not enough stock!")
