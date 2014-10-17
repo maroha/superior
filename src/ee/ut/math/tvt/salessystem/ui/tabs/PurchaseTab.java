@@ -17,12 +17,12 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import org.apache.log4j.Logger;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
-import org.controlsfx.dialog.Dialogs;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
@@ -48,10 +48,13 @@ public class PurchaseTab extends Tab {
 
 	private PurchaseItemPanel purchasePane;
 	
-	private GridPane confirmPane;
 	private Label sumValue;
 
 	private SalesSystemModel model;
+	
+	private Dialog purchaseConfirmDialog;
+	
+	private TextField payAmount; //confirmation dialog widget
 
 	public PurchaseTab(SalesDomainController controller, SalesSystemModel model) {
 		this.domainController = controller;
@@ -77,14 +80,18 @@ public class PurchaseTab extends Tab {
 		purchasePane = new PurchaseItemPanel(model, getTabPane());
 		panel.add(purchasePane, 0, 1);
 		
+		createPurchaseConfirmationDialog();
 		
-		//purchase confirmation pane
-		confirmPane = new GridPane();
+		return panel;
+	}
+	
+	public void createPurchaseConfirmationDialog(){
+		VBox confirmPane = new VBox();
 
 		sumValue = new Label(
 				String.valueOf(model.getCurrentPurchaseTableModel().getSum()));
 		Label changeValue = new Label("0");
-		TextField payAmount = new TextField("0");
+		payAmount = new TextField("0");
 		payAmount.textProperty().addListener(new ChangeListener<String>(){
 
 			@Override
@@ -110,12 +117,15 @@ public class PurchaseTab extends Tab {
 			}
 		});
 		
-		confirmPane.add(new HBox(new Label("Order sum: "), sumValue), 0, 0);
-		confirmPane.add(new HBox(new Label("Change: "), changeValue), 0, 1);
-		confirmPane.add(new HBox(new Label("Payment amount: "), payAmount), 0, 2);
+		confirmPane.getChildren().addAll(
+							new HBox(new Label("Order sum: "), sumValue),
+							new HBox(new Label("Change: "), changeValue),
+							new HBox(new Label("Payment amount: "), payAmount));
+					
+		purchaseConfirmDialog = new Dialog(getTabPane(), "Payment Confirmation");
 		
-
-		return panel;
+		purchaseConfirmDialog.getActions().setAll(Dialog.ACTION_OK, Dialog.ACTION_CANCEL);
+		purchaseConfirmDialog.setContent(confirmPane);
 	}
 
 	// The purchase menu. Contains buttons "New purchase", "Submit", "Cancel".
@@ -210,15 +220,9 @@ public class PurchaseTab extends Tab {
 	}
 
 	/** Event handler for the <code>submit purchase</code> event. */
-	@SuppressWarnings("deprecation")
 	protected void submitPurchaseButtonClicked() {
 		sumValue.setText(String.valueOf(model.getCurrentPurchaseTableModel().getSum()));
-		
-		Action response = Dialogs.create()
-		.title("Payment Confirmation")
-		.graphic(confirmPane)
-		.actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
-		.showConfirm();
+		Action response = purchaseConfirmDialog.show();
 		
 		if(response == Dialog.ACTION_OK){
 			log.info("Sale complete");
@@ -266,6 +270,8 @@ public class PurchaseTab extends Tab {
 		submitPurchase.setDisable(true);
 		newPurchase.setDisable(false);
 		purchasePane.setEnabled(false);
+		
+		payAmount.setText("0");
 	}
 
 }

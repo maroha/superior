@@ -8,9 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import org.apache.log4j.Logger;
-
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
@@ -21,12 +18,6 @@ import ee.ut.math.tvt.salessystem.ui.tabs.StockTab;
  * Graphical user interface of the sales system.
  */
 public class SalesSystemUI extends Stage {
-
-	private static final long serialVersionUID = 1L;
-
-	private static final Logger log = Logger.getLogger(SalesSystemUI.class);
-
-	private final SalesDomainController domainController;
 
 	// Warehouse model
 	private SalesSystemModel model;
@@ -43,7 +34,6 @@ public class SalesSystemUI extends Stage {
 	 *            Sales domain controller.
 	 */
 	public SalesSystemUI(SalesDomainController domainController) {
-		this.domainController = domainController;
 		this.model = new SalesSystemModel(domainController);
 
 		// Create singleton instances of the tab classes

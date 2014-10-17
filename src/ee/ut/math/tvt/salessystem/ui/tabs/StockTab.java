@@ -61,11 +61,11 @@ public class StockTab extends Tab {
     	panel.getColumnConstraints().addAll(new ColumnConstraints(), column2);
 		
 		
-		TextField idField = new TextField();
-		TextField nameField = new TextField();
-		TextField descField = new TextField();
-		TextField priceField = new TextField();
-		TextField quantityField = new TextField();
+		TextField idField = new TextField("");
+		TextField nameField = new TextField("");
+		TextField descField = new TextField("");
+		TextField priceField = new TextField("0");
+		TextField quantityField = new TextField("1");
 		
 		
 		panel.add(new Label("Id"), 0, 0);

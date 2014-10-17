@@ -17,7 +17,7 @@ import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
 import ee.ut.math.tvt.salessystem.ui.SalesSystemUI;
 
 /**
- * MAIN CLASS Starts JavaFX application and initializes IntroUI stage.
+ * MAIN CLASS Starts JavaFX application and initializes SaleesSystemUI / ConsoleUI
  * 
  * @author Kevin Nemerzitski
  */
@@ -43,29 +43,27 @@ public class Intro extends Application {
 				ConsoleUI cui = new ConsoleUI(domainController);
 				cui.run();
 			} else {
-
 				IntroUI introUI = new IntroUI();
 				introUI.initModality(Modality.APPLICATION_MODAL);
-
 				introUI.setAlwaysOnTop(true);
 
-				// TODO - convert userinterface from jswing to javafx
 				final SalesSystemUI ui = new SalesSystemUI(domainController);
 
 				if (introDuration > 0) {
 					introUI.show();
 					new Timeline(new KeyFrame(Duration.millis(introDuration),
-							action -> {
-								introUI.hide();
-								ui.show();
-							})).play();
+						action -> {
+							introUI.hide();
+							ui.show();
+						}
+					)).play();
 				} else
 					ui.show();
 
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 	}
 

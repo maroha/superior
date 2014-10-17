@@ -33,8 +33,6 @@ import ee.ut.math.tvt.salessystem.ui.model.SalesSystemTableModel;
  */
 public class PurchaseItemPanel extends GridPane {
 
-    private static final long serialVersionUID = 1L;
-
 	private static final Logger log = Logger.getLogger(Intro.class);
     
     // Text field on the dialogPane
@@ -66,6 +64,7 @@ public class PurchaseItemPanel extends GridPane {
 
         setEnabled(false);
     }
+  
 
     // shopping cart pane
     private Node drawBasketPane() {
@@ -97,10 +96,8 @@ public class PurchaseItemPanel extends GridPane {
 
     // purchase dialog
     private Node drawDialogPane() {
-
         // Create the panel
     	GridPane panel = new GridPane();
-    	//panel.setStyle("-fx-grid-lines-visible: true;");
     	
     	panel.setPadding(new Insets(4));
     	ColumnConstraints column2 = new ColumnConstraints();
@@ -121,7 +118,6 @@ public class PurchaseItemPanel extends GridPane {
 
         // Initialize the textfields
         barCodeField = new TextField();
-
 		quantityField = new TextField("1");
         nameField = new TextField();
         priceField = new TextField();
@@ -219,7 +215,6 @@ public class PurchaseItemPanel extends GridPane {
     /**
      * Add new item to the cart.
      */
-    @SuppressWarnings("deprecation")
 	public void addItemEventHandler() {
         // add chosen item to the shopping cart.
         StockItem stockItem = getStockItemByBarcode();
@@ -229,12 +224,15 @@ public class PurchaseItemPanel extends GridPane {
             } catch (NumberFormatException ex) {
                 quantity = 1;
             }
+            if(quantity == 0)
+            	return;
             if (stockItem != null) {
-            	//check if same item has already been added
+            	//check if warehouse has items left
             	int prevQuantity = 0;
             	for(SoldItem soldItem : model.getCurrentPurchaseTableModel()){
             		if(soldItem.getStockItem().equals(stockItem)){
             			prevQuantity += soldItem.getQuantity();
+            			break;
             		}
             	}
             	if(stockItem.getQuantity() < quantity+prevQuantity){
@@ -245,11 +243,11 @@ public class PurchaseItemPanel extends GridPane {
             			msg = "Warehouse has no " + stockItem.getName() + ".";
             		
             		Dialogs.create()
-            			.owner(root)
-            			.title("Warning")
-            			.masthead("Not enough stock!")
-            			.message(msg)
-            			.showWarning();
+            		.owner(root)
+            		.title("Warning")
+            		.masthead("Not enough stock!")
+            		.message("No message")
+            		.showWarning();
             		
             		return;
             	}

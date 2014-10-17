@@ -77,10 +77,6 @@ public class IntroUI extends Stage {
 		Scene scene = new Scene(root, width, height);
 		setScene(scene);
 		
-
-		
-//		show();	
-		
 		log.info("Intro window has been opened.");
 
 		createWidgets();
@@ -189,6 +185,5 @@ public class IntroUI extends Stage {
 		String maj = prop.getProperty("build.major.number");
 		version = maj + "." + min + "." + rev;
 	}
-
 
 }
