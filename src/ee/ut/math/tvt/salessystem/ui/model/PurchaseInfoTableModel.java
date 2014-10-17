@@ -3,6 +3,7 @@ package ee.ut.math.tvt.salessystem.ui.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
+import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**
  * Purchase history details model.
@@ -89,14 +91,18 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
     /**
      * Add new StockItem to table.
      */
-    public void addItem(final SoldItem item) {
-        /**
-         * XXX In case such stockItem already exists increase the quantity of the
-         * existing stock.
-         */
-        
-        add(item);
-        log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
+    public void addItem(final SoldItem soldItem) {
+		try {
+			SoldItem item = getItemById(soldItem.getId());
+			item.setQuantity(item.getQuantity() + soldItem.getQuantity());
+			log.debug("Found existing item " + soldItem.getName()
+					+ " increased quantity by " + soldItem.getQuantity());
+		}
+		catch (NoSuchElementException e) {
+			add(soldItem);
+			log.debug("Added " + soldItem.getName()
+					+ " quantity of " + soldItem.getQuantity());
+		}
     }
     
     public double getSum(){

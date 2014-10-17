@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 /**
  * Already bought StockItem. SoldItem duplicates name and price for preserving
  * history.
@@ -10,18 +12,18 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	private StockItem stockItem;
 
 	private String name;
-	private Integer quantity;
+    private SimpleIntegerProperty quantity;
 	private double price;
 
 	public SoldItem(StockItem stockItem, int quantity) {
 		this.stockItem = stockItem;
 		this.name = stockItem.getName();
 		this.price = stockItem.getPrice();
-		this.quantity = quantity;
+        this.quantity = new SimpleIntegerProperty(quantity);
 	}
 
 	public Long getId() {
-		return id;
+		return stockItem.getId();
 	}
 
 	public void setId(Long id) {
@@ -45,15 +47,19 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	}
 
 	public Integer getQuantity() {
-		return quantity;
+		return quantity.get();
 	}
+	
+    public SimpleIntegerProperty quantityProperty() {
+		return quantity;
+	} 
 
 	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+		this.quantity.set(quantity);
 	}
 
 	public double getSum() {
-		return price * ((double) quantity);
+		return price * ((double) quantity.get());
 	}
 
 	public StockItem getStockItem() {
