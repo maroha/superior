@@ -98,9 +98,8 @@ public class PurchaseTab extends Tab {
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
 				double paymentAmount = 0;
-				
 				if(!newValue.isEmpty()){ //check new value
-					if(newValue.endsWith("f") || newValue.endsWith("d")){
+					if(newValue.endsWith("f") || newValue.endsWith("d") || newValue.startsWith("-") ){
 						payAmount.setText(oldValue);
 						return;
 					}
