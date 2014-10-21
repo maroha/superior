@@ -246,7 +246,7 @@ public class PurchaseItemPanel extends GridPane {
             		.owner(root)
             		.title("Warning")
             		.masthead("Not enough stock!")
-            		.message("No message")
+            		.message(msg)
             		.showWarning();
             		
             		return;
