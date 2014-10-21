@@ -114,6 +114,7 @@ public class PurchaseItemPanel extends GridPane {
 		
 		productsComboBox = new ComboBox<StockItem>(warehouseList);
 		productsComboBox.setMinHeight(24);
+		productsComboBox.setStyle("-fx-font-size: 12px");
         GridPane.setMargin(productsComboBox, new Insets(0,0,5,0));
 
         // Initialize the textfields
