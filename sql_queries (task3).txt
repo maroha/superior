@@ -1,0 +1,17 @@
+Query that returns the most popular product name, total quantity, unit price and unit price multiplied by the total quantity sold (most popular one is the one that gave highest income - last column max number) 
+--
+select top 1 stockitem.name as "Name", stockitem.quantity as "Total quantity", stockitem.price as "Unit price", sum(stockitem.price*solditem.quantity) as "Unit price * total quantity sold"
+from solditem inner join stockitem on stockitem.id=stockitem_id 
+group by stockitem_id, stockitem.name, stockitem.quantity, stockitem.price
+order by "Unit price * total quantity sold" desc 
+--
+
+Query that returns the date with the highest income (should return only one row) 
+--
+select thedate as "Highest income date" from
+(select top 1 cast(sale_date as date) as thedate, sum(totalprice) as total
+from acceptedorder
+group by thedate
+order by total desc)
+--
+

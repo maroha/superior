@@ -24,8 +24,9 @@
 
         <mapping package="ee.ut.math.tvt.salessystem.domain.data"/>
         
-        <mapping class="ee.ut.math.tvt.salessystem.domain.data.SoldItem"/>
+        <mapping class="ee.ut.math.tvt.salessystem.domain.data.SoldItem"/> 
         <mapping class="ee.ut.math.tvt.salessystem.domain.data.StockItem"/>
+        <mapping class="ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder"/> 
 
     </session-factory>
 

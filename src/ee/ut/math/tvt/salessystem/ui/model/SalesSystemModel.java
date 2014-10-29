@@ -3,6 +3,7 @@ package ee.ut.math.tvt.salessystem.ui.model;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
 
 /**
  * Main model. Holds all the other models.
@@ -34,7 +35,7 @@ public class SalesSystemModel {
 
         // populate stock model with data from the warehouse
         warehouseTableModel.populateWithData(domainController.loadWarehouseState());
-
+        purchaseHistoryTableModel.populateWithData(domainController.loadHistoryState());
     }
 
     public StockTableModel getWarehouseTableModel() {
