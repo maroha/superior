@@ -8,10 +8,9 @@ order by "Unit price * total quantity sold" desc
 
 Query that returns the date with the highest income (should return only one row) 
 --
-select thedate as "Highest income date" from
-(select top 1 cast(sale_date as date) as thedate, sum(totalprice) as total
+select top 1 cast(sale_date as date) as "Highest income date"
 from acceptedorder
-group by thedate
-order by total desc)
+group by "Highest income date"
+order by sum(totalprice) desc
 --
 
