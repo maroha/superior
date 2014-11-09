@@ -1,18 +1,35 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Already bought StockItem. SoldItem duplicates name and price for preserving
  * history.
  */
+@Entity
+@Table(name = "SOLDITEM")
 public class SoldItem implements Cloneable, DisplayableItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "stockitem_id", nullable = false)
 	private StockItem stockItem;
 
+    //@ManyToMany(mappedBy="SOLDITEM")
+    //private Set<AcceptedOrder> acceptedOrders;
+
+    @Column(name = "name")
 	private String name;
+
+    @Column(name = "quantity")
     private SimpleIntegerProperty quantity;
+
+    @Column(name = "itemprice")
 	private double price;
 
 	public SoldItem(StockItem stockItem, int quantity) {

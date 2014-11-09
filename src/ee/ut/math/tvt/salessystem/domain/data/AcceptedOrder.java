@@ -2,19 +2,32 @@ package ee.ut.math.tvt.salessystem.domain.data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.*;
 
 
 /**
  * Stock item. Corresponds to the Data Transfer Object design pattern.
  */
+@Entity
+@Table(name = "ACCEPTEDORDER")
 public class AcceptedOrder implements Cloneable, DisplayableItem {
-	
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
+    @Column(name = "sale_date")
 	private LocalDateTime dateTime;
-	
+
+    @ManyToMany
+    @JoinTable(
+            name = "ACCEPTEDORDER_TO_SOLDITEMS",
+            joinColumns = @JoinColumn(name = "ACCEPTEDORDER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
+    )
 	private List<SoldItem> items;
-	
+
+    @Column(name = "totalprice")
 	private double sum;
     
     
