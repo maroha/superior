@@ -26,7 +26,7 @@ public class Intro extends Application {
 	private static final Logger log = Logger.getLogger(Intro.class);
 	private static final String MODE = "console";
 
-	private int introDuration = 0; // milliseconds, 0 - disabled
+	private int introDuration = 3000; // milliseconds, 0 - disabled
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
