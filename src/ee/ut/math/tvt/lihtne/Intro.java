@@ -11,7 +11,7 @@ import javafx.util.Duration;
 
 import org.apache.log4j.Logger;
 
-import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.controller.impl.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.controller.impl.SalesDomainControllerImpl;
 import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
 import ee.ut.math.tvt.salessystem.ui.SalesSystemUI;

@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.controller.impl.SalesDomainController;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
@@ -59,7 +59,8 @@ public class SalesSystemUI extends Stage {
 
 			@Override
 			public void handle(WindowEvent event) {
-				System.exit(0);
+				domainController.endSession();
+                System.exit(0);
 			   }
 		});
 

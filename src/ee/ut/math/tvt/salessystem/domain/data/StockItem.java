@@ -2,21 +2,30 @@ package ee.ut.math.tvt.salessystem.domain.data;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
+import javax.persistence.*;
 
 
 /**
  * Stock item. Corresponds to the Data Transfer Object design pattern.
  */
+@Entity
+@Table(name = "STOCKITEM")
 public class StockItem implements Cloneable, DisplayableItem {
-	
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "Name")
     private String name;
 
+    @Column(name = "price")
     private double price;
 
+    @Column(name = "description")
     private String description;
-    
+
+    @Column(name = "quantity")
     //private int quantity;
     private SimpleIntegerProperty quantity;
 
