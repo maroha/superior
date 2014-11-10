@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 
-import ee.ut.math.tvt.salessystem.domain.controller.impl.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
@@ -235,7 +235,7 @@ public class PurchaseTab extends Tab {
 				AcceptedOrder newAccpetedOrder = 
 						new AcceptedOrder(model.getCurrentPurchaseTableModel().getItems());
 				
-				model.getPurchaseHistoryTableModel().add(newAccpetedOrder);
+				model.getPurchaseHistoryTableModel().addItem(newAccpetedOrder);
 				
 				model.getCurrentPurchaseTableModel().clear();
 			} catch (VerificationFailedException e1) {

@@ -3,8 +3,33 @@ package ee.ut.math.tvt.salessystem.domain.data;
 import javax.persistence.*;
 import javax.persistence.GenerationType;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
+@TypeDefs(
+	{
+	 @TypeDef(name = "LocalDateTime", 
+			  typeClass = ee.ut.math.tvt.salessystem.hibernate.usertypes.LocalDateTimeUserType.class)
+	}
+)
 
 /**
  * Stock item. Corresponds to the Data Transfer Object design pattern.
@@ -12,25 +37,21 @@ import java.util.List;
 @Entity
 @Table(name = "ACCEPTEDORDER")
 public class AcceptedOrder implements Cloneable, DisplayableItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "sale_date")
+	
+    @Type(type="LocalDateTime")
+	@Column(name = "SALE_DATE")
 	private LocalDateTime dateTime;
+	
+    @OneToMany(mappedBy = "acceptedOrder")
+    private List<SoldItem> items;
+	
+	@Column(name = "TOTALPRICE")
 
-    @ManyToMany
-    @JoinTable(
-            name = "ACCEPTEDORDER_TO_SOLDITEMS",
-            joinColumns = @JoinColumn(name = "ACCEPTEDORDER_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
-    )
-	private List<SoldItem> items;
-
-    @Column(name = "totalprice")
 	private double sum;
-    
     
     public AcceptedOrder(List<SoldItem> items) {
     	this.items = items;    
@@ -39,6 +60,8 @@ public class AcceptedOrder implements Cloneable, DisplayableItem {
     	}
     	dateTime = LocalDateTime.now();
     }
+    
+    public AcceptedOrder(){}
 
     public List<SoldItem> getItems() {
         return items;
@@ -63,11 +86,19 @@ public class AcceptedOrder implements Cloneable, DisplayableItem {
     public double getSum(){
     	return sum;
     }
+    
+    public LocalDateTime getLocalDateTime(){
+    	return dateTime;
+    }
 
     public Object clone() {
     	AcceptedOrder order =
             new AcceptedOrder(getItems());
         return order;
+    }
+    
+    public String toString(){
+    	return "AcceptedOrder [dateTime=" + dateTime + ", sum=" + sum + "]";
     }
 		
 }

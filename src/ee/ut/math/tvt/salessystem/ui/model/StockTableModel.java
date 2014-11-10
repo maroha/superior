@@ -11,6 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.service.HibernateDataService;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 /**
  * Stock item table model.
@@ -67,19 +69,33 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	/**
 	 * Add new stock item to table. If there already is a stock item with
 	 * same id, then existing item's quantity will be increased.
-	 * @param stockItem
+	 * @param newItem
 	 */
-	public void addItem(final StockItem stockItem) {
+	public void addItem(final StockItem newItem) {
 		try {
-			StockItem item = getItemById(stockItem.getId());
-			item.setQuantity(item.getQuantity() + stockItem.getQuantity());
-			log.debug("Found existing item " + stockItem.getName()
-					+ " increased quantity by " + stockItem.getQuantity());
+			StockItem existingItem = getItemById(newItem.getId());
+			int oldQuantity = existingItem.getQuantity();
+			int newQuantity = existingItem.getQuantity() + newItem.getQuantity();
+			if(newQuantity < 0){
+				if(oldQuantity > 0){
+					existingItem.setQuantity(0);
+					log.debug("Found existing item " + newItem.getName()
+							+ " set quantity to 0");
+				}
+			}else{
+				existingItem.setQuantity(newQuantity);
+				log.debug("Found existing item " + newItem.getName()
+						+ " increased quantity by " + newItem.getQuantity());
+			}
+			HibernateDataService.updateStockItemQuantity(existingItem);
 		}
 		catch (NoSuchElementException e) {
-			add(stockItem);
-			log.debug("Added " + stockItem.getName()
-					+ " quantity of " + stockItem.getQuantity());
+			if(HibernateDataService.insertStockItem(newItem)){
+				add(newItem);
+				log.debug("Added " + newItem.getName()
+						+ " quantity of " + newItem.getQuantity());
+			}
+
 		}
 	}
 

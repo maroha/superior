@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
-import ee.ut.math.tvt.salessystem.domain.controller.impl.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
@@ -109,9 +109,9 @@ public class ConsoleUI {
 		if (c[0].equals("h"))
 			printUsage();
 		else if (c[0].equals("q")){
-            dc.endSession();
-			System.exit(0);}
-		else if (c[0].equals("w"))
+			dc.endSession();
+			System.exit(0);
+		}else if (c[0].equals("w"))
 			showStock(warehouse);
 		else if (c[0].equals("c"))
 			showStock(cart);

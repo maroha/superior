@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -67,7 +69,6 @@ public class StockTab extends Tab {
 		TextField priceField = new TextField("0");
 		TextField quantityField = new TextField("1");
 		
-		
 		panel.add(new Label("Id"), 0, 0);
 		panel.add(new Label("Name"), 0, 1);
 		panel.add(new Label("Desc"), 0, 2);
@@ -86,18 +87,34 @@ public class StockTab extends Tab {
 
 			@Override
 			public void handle(ActionEvent event) {
-				long id = 0;
+				Long id = null;
 				String name = null;
 				String desc = null;
-				double price = 0;
-				int quantity = 0;
+				Double price = null;
+				Integer quantity = null;
 				try {
 					id = Long.parseLong(idField.getText());
+					idField.setStyle("-fx-text-fill: default;");
 					name = nameField.getText();
 					desc = descField.getText();
 					price = Double.parseDouble(priceField.getText());
+					priceField.setStyle("-fx-text-fill: default;");
 					quantity = Integer.parseInt(quantityField.getText());
+					quantityField.setStyle("-fx-text-fill: default;");
 				} catch (Exception e) {
+					if(id == null){
+						idField.setStyle("-fx-text-fill: red;");
+						return;
+					}
+					if(price == null){
+						priceField.setStyle("-fx-text-fill: red;");
+						return;
+					}
+					if(quantity == null){
+						quantityField.setStyle("-fx-text-fill: red;");
+						return;
+					}
+
 					return;
 				}
 				
