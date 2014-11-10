@@ -59,7 +59,8 @@ public class SalesSystemUI extends Stage {
 
 			@Override
 			public void handle(WindowEvent event) {
-				System.exit(0);
+				domainController.endSession();
+                System.exit(0);
 			   }
 		});
 

@@ -12,9 +12,22 @@
 	<property name="res.dir" value="${basedir}/res"/>
 	<property name="main.class" value="ee.ut.math.tvt.lihtne.Intro"/>
 	
+	<!-- database variables -->
+	<property name="data.dir"	value="${basedir}/data"/>
+	<property name="db.file"	value="${data.dir}/POSdb"/>
+	<property name="db.alias"	value="POS"/>
+	<property name="db.url" 	value="jdbc:hsqldb:hsql://localhost/POS"/>
+	<property name="lib.hibernate.dir"   value="${lib.dir}/hibernate"/>
+	
 	<!-- Paths -->
 	<path id="build.classpath">
-	    <fileset id="build.libs" dir="${lib.dir}" includes="*.jar"/>
+	        <fileset id="build.libs" dir="${lib.dir}">
+	            <include name="*.jar"/>
+	        </fileset>
+
+	        <fileset id="build.libs.hibernate" dir="${lib.hibernate.dir}">
+	             <include name="*.jar"/>
+	        </fileset>
 	</path>
 	
 	<path id="run.classpath">
@@ -58,8 +71,8 @@
 	<target name="run" depends="build" description="Executing app via class Intro">
 	    <java classname="${main.class}" fork="yes">
 	    	  <classpath refid="run.classpath"/>
-	          <jvmarg value="-Xdebug" />
-	          <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+	          <!-- <jvmarg value="-Xdebug" />
+	          <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" /> -->
 	    </java>
 	</target>
 	
@@ -81,6 +94,7 @@
 			jarfile="${dist.dir}/${team.name}.jar" 
 			basedir="${build.classes.dir}">
 			<zipgroupfileset refid="build.libs" />
+			<zipgroupfileset refid="build.libs.hibernate" />
 			<zipfileset dir="${res.dir}" includes="*" prefix="res"/>
 			<path refid="dist.files"/>
 		    <manifest>
@@ -165,5 +179,25 @@
 			</args>
 		</git>
 	</target>	
+	
+	<target name="dbmanager" description="Start the HSQLDB manager">
+	        <java
+	            classname="org.hsqldb.util.DatabaseManagerSwing"
+	            classpathref="run.classpath"
+	            fork="yes"
+	        >
+	            <arg line="--user sa --url ${db.url}" />
+	        </java>
+	    </target>
+
+	<target name="startdb" description="Start the HSQLDB with the default params">
+	        <java
+	            classname="org.hsqldb.Server"
+	            classpathref="run.classpath"
+	            fork="yes"
+	        >
+	            <arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" /> 
+	        </java>
+	</target>
 	
 </project>

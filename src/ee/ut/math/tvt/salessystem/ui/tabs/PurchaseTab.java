@@ -235,7 +235,7 @@ public class PurchaseTab extends Tab {
 				AcceptedOrder newAccpetedOrder = 
 						new AcceptedOrder(model.getCurrentPurchaseTableModel().getItems());
 				
-				model.getPurchaseHistoryTableModel().add(newAccpetedOrder);
+				model.getPurchaseHistoryTableModel().addItem(newAccpetedOrder);
 				
 				model.getCurrentPurchaseTableModel().clear();
 			} catch (VerificationFailedException e1) {

@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
+import ee.ut.math.tvt.salessystem.service.HibernateDataService;
 
 /**
  * Stock item table model.
@@ -41,6 +42,11 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<AcceptedOrd
         columnList.add(sumCol);
         
         return columnList;
+    }
+    
+    public void addItem(AcceptedOrder item){
+    	if(HibernateDataService.insertAcceptedOrder(item))
+    		add(item);
     }
 
 	@Override
