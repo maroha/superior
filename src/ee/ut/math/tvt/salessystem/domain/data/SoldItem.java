@@ -50,7 +50,7 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	private String name;
 	
     @Type(type="SimpleIntegerProperty")
-    @Column(name = "QUANTITY")
+    @Column(name = "SOLD_QUANTITY")
     private SimpleIntegerProperty quantity;
     
 	@Column(name = "ITEMPRICE")
@@ -58,7 +58,7 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	private double price;
 	
     @Type(type="SimpleDoubleProperty")
-    @Column(name = "QUANTITY*ITEMPRICE")
+    @Column(name = "SOLD_QUANTITY*ITEMPRICE")
     private SimpleDoubleProperty sum;
 	
     @ManyToOne
