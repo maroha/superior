@@ -36,6 +36,7 @@ import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 @Entity
 @Table(name = "STOCKITEM")
 public class StockItem implements Cloneable, DisplayableItem {
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +53,7 @@ public class StockItem implements Cloneable, DisplayableItem {
     
     @Type(type="SimpleIntegerProperty")
     @Column(name = "QUANTITY")
-
+    
     private SimpleIntegerProperty quantity;
     
     //How this stock item has been sold
