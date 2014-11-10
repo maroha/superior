@@ -2,7 +2,6 @@ package ee.ut.math.tvt.salessystem.service;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;

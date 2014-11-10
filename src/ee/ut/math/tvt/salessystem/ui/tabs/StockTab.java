@@ -1,7 +1,5 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

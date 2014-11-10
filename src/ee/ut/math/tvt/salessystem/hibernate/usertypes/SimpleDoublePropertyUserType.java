@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 
 import org.hibernate.HibernateException;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 

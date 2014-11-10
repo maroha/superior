@@ -1,26 +1,19 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
-import java.util.List;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import ee.ut.math.tvt.salessystem.service.HibernateDataService;
 import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
-import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 
 @TypeDefs(
