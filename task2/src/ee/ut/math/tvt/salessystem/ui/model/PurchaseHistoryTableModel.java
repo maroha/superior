@@ -2,6 +2,8 @@ package ee.ut.math.tvt.salessystem.ui.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import ee.ut.math.tvt.salessystem.domain.data.Sale;
 
@@ -12,9 +14,12 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 	private static final long serialVersionUID = 1L;
 
 	private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+	
+	private List<Sale> rows;
 
 	public PurchaseHistoryTableModel() {
 		super(new String[] { "Id", "Time", "Sum", "Client" });
+		rows = new ArrayList<Sale>();
 	}
 
 	@Override
@@ -48,5 +53,10 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 		}
 
 		return buffer.toString();
+	}
+
+	@Override
+	public List<Sale> getTableRows() {
+		return rows;
 	}
 }
