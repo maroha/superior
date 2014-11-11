@@ -2,16 +2,24 @@
 <project basedir="." name="POS_Project" default="build">
 	
 	<!-- Global properties -->
-	<property file="application.properties" />
+	
+	<!-- Source -->
 	<property name="src.dir" value="${basedir}/src"/>
+	<property name="test.dir" value="${basedir}/test"/>
+	
+	<!-- Build -->
 	<property name="build.dir" value="${basedir}/build"/>
 	<property name="build.classes.dir" value="${build.dir}/classes"/>
+	<property name="build.test.dir" value="${build.dir}/test"/>
+	
+	<!-- Other -->
+	<property file="application.properties" />
 	<property name="dist.dir" value="${build.dir}/jar"/>
 	<property name="conf.dir" value="${basedir}/conf"/>
 	<property name="lib.dir" value="${basedir}/lib"/>
 	<property name="res.dir" value="${basedir}/res"/>
 	<property name="main.class" value="ee.ut.math.tvt.lihtne.Intro"/>
-	
+
 	<!-- database variables -->
 	<property name="data.dir"	value="${basedir}/data"/>
 	<property name="db.file"	value="${data.dir}/POSdb"/>
@@ -36,6 +44,11 @@
 		<path refid="build.classpath"/>
 	</path>
 	
+	<path id="test.classpath">
+		<path refid="run.classpath"/>
+		<pathelement path="${build.test.dir}/" />
+	</path>
+	
 	<path id="dist.files">
 		<fileset dir="${conf.dir}">
 			<exclude name="*.dtd"/>
@@ -45,6 +58,40 @@
 	</path>
 	
 	<!-- Defined runnable targets -->
+	
+	<!-- JUnit test build -->
+	<target name="build-tests" depends="build" description="Build the system">
+		<mkdir dir="${build.test.dir}"/>
+		<javac
+            srcdir="${test.dir}"
+            destdir="${build.test.dir}"
+            debug="true"
+            debuglevel="lines,vars,source"
+			compiler="modern"
+			encoding="utf-8"
+			target="1.8"
+			source="1.8"
+        	classpathref="build.classpath"
+			includeantruntime="false">
+				<classpath>
+					<pathelement path="${build.classes.dir}" />
+				</classpath>
+		</javac>
+	</target>
+	
+	<!-- JUnit test run -->
+	<target name="test" depends="build-tests" description="Run the template application">
+
+		<junit>
+			<classpath refid="test.classpath" />
+
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${build.test.dir}" includes="**/*.class" />
+			</batchtest>
+		</junit>
+
+	</target>
 	
 	<!-- Clean the build (deleting build classes dir) -->
 	<target name="clean" description="Cleaning up previous build files">

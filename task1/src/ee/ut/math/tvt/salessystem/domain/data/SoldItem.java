@@ -54,7 +54,6 @@ public class SoldItem implements Cloneable, DisplayableItem {
     private SimpleIntegerProperty quantity;
     
 	@Column(name = "ITEMPRICE")
-
 	private double price;
 	
     @Type(type="SimpleDoubleProperty")

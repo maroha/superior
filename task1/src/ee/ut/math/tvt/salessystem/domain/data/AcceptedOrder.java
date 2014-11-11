@@ -50,7 +50,6 @@ public class AcceptedOrder implements Cloneable, DisplayableItem {
     private List<SoldItem> items;
 	
 	@Column(name = "TOTALPRICE")
-
 	private double sum;
     
     public AcceptedOrder(List<SoldItem> items) {

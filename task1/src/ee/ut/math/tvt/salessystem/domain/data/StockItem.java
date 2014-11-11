@@ -52,7 +52,6 @@ public class StockItem implements Cloneable, DisplayableItem {
     
     @Type(type="SimpleIntegerProperty")
     @Column(name = "QUANTITY")
-
     private SimpleIntegerProperty quantity;
     
     //How this stock item has been sold
