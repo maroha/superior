@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.apache.log4j.Logger;
+import org.controlsfx.dialog.Dialogs;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.service.HibernateDataService;
@@ -97,6 +98,20 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 			}
 
 		}
+	}
+	
+	public boolean validateNameUniqueness(String name){
+		for(StockItem item: this){
+			if(item.getName().equals(name))
+				return false;
+		}
+		return true;
+	}
+	
+	public boolean hasEnoughInStock(StockItem item, int takeAmount){
+    	if(item.getQuantity() < takeAmount)
+    		return false;
+    	return true;
 	}
 
 	@Override

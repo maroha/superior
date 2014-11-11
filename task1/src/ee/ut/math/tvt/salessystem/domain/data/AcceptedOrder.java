@@ -1,8 +1,9 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
 import javax.persistence.*;
-import javax.persistence.GenerationType;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,7 +61,8 @@ public class AcceptedOrder implements Cloneable, DisplayableItem {
     	dateTime = LocalDateTime.now();
     }
     
-    public AcceptedOrder(){}
+    public AcceptedOrder(){
+    }
 
     public List<SoldItem> getItems() {
         return items;

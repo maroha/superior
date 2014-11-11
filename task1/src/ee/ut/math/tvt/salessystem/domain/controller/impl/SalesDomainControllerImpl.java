@@ -17,6 +17,7 @@ import ee.ut.math.tvt.salessystem.util.HibernateUtil;
  */
 public class SalesDomainControllerImpl implements SalesDomainController {
 	
+	
 	public void submitCurrentPurchase(List<SoldItem> goods) throws VerificationFailedException {
 		for(SoldItem soldItem: goods){
 			StockItem stockItem = soldItem.getStockItem();
