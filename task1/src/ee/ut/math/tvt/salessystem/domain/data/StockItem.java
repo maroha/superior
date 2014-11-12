@@ -1,26 +1,19 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
-import java.util.List;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import ee.ut.math.tvt.salessystem.service.HibernateDataService;
 import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
-import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 
 @TypeDefs(
@@ -54,10 +47,6 @@ public class StockItem implements Cloneable, DisplayableItem {
     @Column(name = "QUANTITY")
     private SimpleIntegerProperty quantity;
     
-    //How this stock item has been sold
-//    @OneToMany(mappedBy = "stockItem")
-//	private List<SoldItem> items;
-
     /**
      * Constucts new <code>StockItem</code> with the specified values.
      * @param id barcode id
@@ -77,7 +66,6 @@ public class StockItem implements Cloneable, DisplayableItem {
         this.name = name;
         this.description = desc;
         this.price = price;
-//        this.quantity = quantity;
         this.quantity = new SimpleIntegerProperty(quantity);
     }
 
@@ -121,7 +109,6 @@ public class StockItem implements Cloneable, DisplayableItem {
     
     public int getQuantity() {
         return quantity.get();
-//    	return quantity;
     }
     
     public SimpleIntegerProperty quantityProperty() {
@@ -129,7 +116,6 @@ public class StockItem implements Cloneable, DisplayableItem {
 	}
 
     public void setQuantity(int quantity) {
-//        this.quantity = quantity;
     	this.quantity.set(quantity);
     }
 
@@ -155,7 +141,6 @@ public class StockItem implements Cloneable, DisplayableItem {
             case 1: return name;
             case 2: return new Double(price);
             case 3: return new Integer(quantity.get());
-//            case 3: return new Integer(quantity);
             default: throw new RuntimeException("invalid column!");
         }
     }

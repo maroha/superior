@@ -228,15 +228,9 @@ public class PurchaseItemPanel extends GridPane {
             if(quantity == 0)
             	return;
             if (stockItem != null) {
-            	//check if warehouse has items left
-            	int prevQuantity = 0;
-            	for(SoldItem soldItem : model.getCurrentPurchaseTableModel()){
-            		if(soldItem.getStockItem().equals(stockItem)){
-            			prevQuantity += soldItem.getQuantity();
-            			break;
-            		}
-            	}
-            	if(stockItem.getQuantity() < quantity+prevQuantity){
+            	int prevQuantity = model.getCurrentPurchaseTableModel().getQuantityInPurchase(stockItem);
+            	
+            	if (!model.getWarehouseTableModel().hasEnoughInStock(stockItem, quantity+prevQuantity)){
             		log.warn("Out of stock.");
             		
             		String msg = "Warehouse only has " + stockItem.getQuantity() + " " + stockItem.getName() + ".";

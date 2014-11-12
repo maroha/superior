@@ -9,16 +9,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.apache.log4j.Logger;
-import org.controlsfx.dialog.Dialogs;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.service.HibernateDataService;
-import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 /**
  * Stock item table model.
  */
 public class StockTableModel extends SalesSystemTableModel<StockItem> {
+	
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger log = Logger.getLogger(StockTableModel.class);
@@ -109,9 +108,12 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	}
 	
 	public boolean hasEnoughInStock(StockItem item, int takeAmount){
-    	if(item.getQuantity() < takeAmount)
-    		return false;
-    	return true;
+	    for(StockItem i : this) {
+	        if (i.getId().equals(item.getId())) {
+	            return (i.getQuantity() >= takeAmount);
+	        }
+	    }
+	    return false;
 	}
 
 	@Override

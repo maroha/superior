@@ -25,7 +25,6 @@ import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
-import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.panels.PurchaseItemPanel;
@@ -210,9 +209,8 @@ public class PurchaseTab extends Tab {
 	protected void cancelPurchaseButtonClicked() {
 		log.info("Sale cancelled");
 		try {
-			domainController.cancelCurrentPurchase();
+			domainController.cancelCurrentPurchase(model);
 			endSale();
-			model.getCurrentPurchaseTableModel().clear();
 		} catch (VerificationFailedException e1) {
 			log.error(e1.getMessage());
 		}
@@ -228,16 +226,8 @@ public class PurchaseTab extends Tab {
 			try {
 				log.debug("Contents of the current basket:\n"
 						+ model.getCurrentPurchaseTableModel());
-				domainController.submitCurrentPurchase(model
-						.getCurrentPurchaseTableModel());
+				domainController.submitCurrentPurchase(model);
 				endSale();
-				
-				AcceptedOrder newAccpetedOrder = 
-						new AcceptedOrder(model.getCurrentPurchaseTableModel().getItems());
-				
-				model.getPurchaseHistoryTableModel().addItem(newAccpetedOrder);
-				
-				model.getCurrentPurchaseTableModel().clear();
 			} catch (VerificationFailedException e1) {
 				log.error(e1.getMessage());
 			}

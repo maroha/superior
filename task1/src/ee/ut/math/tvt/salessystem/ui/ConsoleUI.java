@@ -3,9 +3,7 @@ package ee.ut.math.tvt.salessystem.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
@@ -13,6 +11,7 @@ import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 /**
  * A simple CLI (limited functionality).
@@ -22,19 +21,16 @@ public class ConsoleUI {
 	private static final Logger log = Logger.getLogger(ConsoleUI.class);
 
 	private final SalesDomainController dc;
-
-	private List<StockItem> cart;
-
-	private List<StockItem> warehouse;
 	
 	private static boolean consoleCreated;
+	
+	SalesSystemModel model;
 
 	public ConsoleUI(SalesDomainController domainController) {
 		consoleCreated = true;
 		this.dc = domainController;
-
-		cart = new ArrayList<StockItem>();
-		warehouse = new ArrayList<StockItem>();
+		
+		model = new SalesSystemModel(domainController);
 	}
 
 	/**
@@ -42,8 +38,6 @@ public class ConsoleUI {
 	 */
 	public void run() {
 		try {
-			// populate warehouse with goodies
-			populateWarehouse();
 
 			System.out.println("===========================");
 			System.out.println("=       Sales System      =");
@@ -64,13 +58,23 @@ public class ConsoleUI {
 		}
 	}
 
-	private void populateWarehouse() {
-		warehouse = dc.loadWarehouseState();
-	}
-
 	private void showStock(List<StockItem> stock) {
 		System.out.println("-------------------------");
 		for (StockItem si : stock) {
+			System.out.println(si.getId() + " "
+					+ si.getName() + " "
+					+ si.getPrice() + "Euro ("
+					+ si.getQuantity() + " items)");
+		}
+		if (stock.size() == 0) {
+			System.out.println("\tNothing");
+		}
+		System.out.println("-------------------------");
+	}
+	
+	private void showCart(List<SoldItem> stock) {
+		System.out.println("-------------------------");
+		for (SoldItem si : stock) {
 			System.out.println(si.getId() + " "
 					+ si.getName() + " "
 					+ si.getPrice() + "Euro ("
@@ -96,11 +100,7 @@ public class ConsoleUI {
 	}
 
 	private StockItem getStockItemById(int id) {
-		for (StockItem item : warehouse) {
-			if (item.getId() == id)
-				return item;
-		}
-		throw new NoSuchElementException();
+		return model.getWarehouseTableModel().getItemById(id);
 	}
 
 	private void processCommand(String command) {
@@ -112,33 +112,29 @@ public class ConsoleUI {
 			dc.endSession();
 			System.exit(0);
 		}else if (c[0].equals("w"))
-			showStock(warehouse);
+			showStock(model.getWarehouseTableModel());
 		else if (c[0].equals("c"))
-			showStock(cart);
+			showCart(model.getCurrentPurchaseTableModel());
 		else if (c[0].equals("p"))
 			try {
-			    List<SoldItem> soldItems = new ArrayList<SoldItem>();
-			    for(StockItem stockItem : cart) {
-			        soldItems.add(new SoldItem(stockItem, stockItem.getQuantity()));
-			    }
-				dc.submitCurrentPurchase(soldItems);
-				cart.clear();
+				dc.submitCurrentPurchase(model);
 			} catch (VerificationFailedException e) {
 				log.error(e.getMessage());
 			}
 		else if (c[0].equals("r")) 
 			try {
-				dc.cancelCurrentPurchase();
-				cart.clear();
+				dc.cancelCurrentPurchase(model);
 			} catch (VerificationFailedException e) {
 				log.error(e.getMessage());
 			}
 		else if (c[0].equals("a") && c.length == 3) {
 			int idx = Integer.parseInt(c[1]);
 			int amount = Integer.parseInt(c[2]);
-			StockItem item = getStockItemById(idx);
-			item.setQuantity(Math.min(amount, item.getQuantity()));
-			cart.add(item);
+			StockItem stockItem = getStockItemById(idx);
+			SoldItem soldItem = new SoldItem(stockItem, 0);
+			amount += model.getCurrentPurchaseTableModel().getQuantityInPurchase(stockItem);
+        	soldItem.setQuantity(Math.min(amount, stockItem.getQuantity()));
+        	model.getCurrentPurchaseTableModel().addItem(soldItem);
 		}
 	}
 	

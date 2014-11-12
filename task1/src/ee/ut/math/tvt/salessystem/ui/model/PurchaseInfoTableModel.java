@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
+import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**
  * Purchase history details model.
@@ -112,6 +113,15 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			sum += item.getSum();
 		}
 		return sum;
+    }
+    
+    public int getQuantityInPurchase(StockItem stockItem){
+    	for(SoldItem soldItem : this){
+    		if(soldItem.getStockItem().equals(stockItem)){
+    			return soldItem.getQuantity();
+    		}
+    	}
+    	return 0;
     }
     
     public List<SoldItem> getItems(){

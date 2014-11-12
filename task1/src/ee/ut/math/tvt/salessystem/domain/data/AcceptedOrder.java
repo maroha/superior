@@ -1,9 +1,6 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
-import javax.persistence.*;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,13 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -96,6 +88,14 @@ public class AcceptedOrder implements Cloneable, DisplayableItem {
     	AcceptedOrder order =
             new AcceptedOrder(getItems());
         return order;
+    }
+    
+    public Set<Long> getItemsIds(){
+		Set<Long> theSet = new HashSet<Long>();
+		for(SoldItem soldItem: getItems()){
+			theSet.add(soldItem.getId());
+		}
+		return theSet;
     }
     
     public String toString(){

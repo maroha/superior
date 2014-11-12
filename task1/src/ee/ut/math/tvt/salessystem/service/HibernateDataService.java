@@ -2,7 +2,6 @@ package ee.ut.math.tvt.salessystem.service;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -21,8 +20,6 @@ public class HibernateDataService {
 	
 	private static Session session = HibernateUtil.currentSession();
 	
-	private static boolean transactionActive = false;
-
 	public static List<StockItem> getStockItems() {
 		List<StockItem> result = session.createQuery("from StockItem").list();
 		return result;
@@ -43,7 +40,6 @@ public class HibernateDataService {
 		Transaction transaction = session.beginTransaction();
     	try{
         	action.run(); //do the query
-//        	session.flush();
         	transaction.commit();
         	log.info("Transaction end. Success: " + true);
         	return true;
@@ -83,6 +79,7 @@ public class HibernateDataService {
 		    	Query id_val = session.createSQLQuery("CALL IDENTITY();");
 		    	BigInteger acceptedOrderId = (BigInteger)id_val.uniqueResult();
 		    	acceptedOrderId.add(new BigInteger("1"));
+		    	item.setId(acceptedOrderId.longValue());
 		    	for(SoldItem soldItem: item.getItems()){
 		        	Query qs = session.createSQLQuery("INSERT INTO SoldItem VALUES (NULL," + soldItem.getStockItem().getId() + "," + acceptedOrderId + ",'" + soldItem.getName() +"',"+ soldItem.getQuantity() + "," +soldItem.getPrice() + ");");
 		        	qs.executeUpdate();

@@ -2,8 +2,6 @@ package ee.ut.math.tvt.salessystem.ut.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 import junit.framework.Assert;
 
@@ -13,7 +11,6 @@ import org.junit.Test;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
-import ee.ut.math.tvt.salessystem.ui.model.StockTableModel;
 
 public class PurchaseInfoTableModelTest {
 
@@ -48,6 +45,11 @@ public class PurchaseInfoTableModelTest {
 	@Test
 	public void testGetSum(){
 		Assert.assertEquals(purchaseModel.getSum(), 356.32d, 0.00001d);
+	}
+	
+	@Test
+	public void testGetQuantityInPurchase(){
+		Assert.assertEquals(purchaseModel.getQuantityInPurchase(soldItem3.getStockItem()), 1);
 	}
 
 	

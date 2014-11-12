@@ -3,9 +3,9 @@ package ee.ut.math.tvt.salessystem.domain.controller;
 import java.util.List;
 
 import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
-import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 /**
  * Sales domain controller is responsible for the domain specific business
@@ -36,7 +36,7 @@ public interface SalesDomainController {
      * 
      * @throws VerificationFailedException
      */
-    public void cancelCurrentPurchase() throws VerificationFailedException;
+    public void cancelCurrentPurchase(SalesSystemModel model) throws VerificationFailedException;
 
     /**
      * Commit business transaction - purchsae of goods.
@@ -45,7 +45,7 @@ public interface SalesDomainController {
      *            Goods that the buyer has chosen to buy.
      * @throws VerificationFailedException
      */
-    public void submitCurrentPurchase(List<SoldItem> goods)
+    public void submitCurrentPurchase(SalesSystemModel model)
             throws VerificationFailedException;
     
     public void endSession();

@@ -3,7 +3,6 @@ package ee.ut.math.tvt.salessystem.ui.model;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
-import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
 
 /**
  * Main model. Holds all the other models.
@@ -20,15 +19,11 @@ public class SalesSystemModel {
     
     private PurchaseHistoryTableModel purchaseHistoryTableModel;
 
-    private final SalesDomainController domainController;
-
     /**
      * Construct application model.
      * @param domainController Sales domain controller.
      */
     public SalesSystemModel(SalesDomainController domainController) {
-        this.domainController = domainController;
-        
         warehouseTableModel = new StockTableModel();
         currentPurchaseTableModel = new PurchaseInfoTableModel();
         purchaseHistoryTableModel = new PurchaseHistoryTableModel();
