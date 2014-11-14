@@ -27,6 +27,11 @@
 	<property name="db.url" 	value="jdbc:hsqldb:hsql://localhost/POS"/>
 	<property name="lib.hibernate.dir"   value="${lib.dir}/hibernate"/>
 	
+	<!-- test database variables -->
+	<property name="test.data.dir"	value="${basedir}/test.data"/>
+	<property name="test.db.file"	value="${test.data.dir}/POSdb"/>
+	<property name="test.db.alias"	value="POS"/>
+	
 	<!-- Paths -->
 	<path id="build.classpath">
 	        <fileset id="build.libs" dir="${lib.dir}">
@@ -244,6 +249,16 @@
 	            fork="yes"
 	        >
 	            <arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" /> 
+	        </java>
+	</target>
+	
+	<target name="test.startdb" description="Start the HSQLDB with the default params">
+	        <java
+	            classname="org.hsqldb.Server"
+	            classpathref="run.classpath"
+	            fork="yes"
+	        >
+	            <arg line="-database.0 '${test.db.file}' -dbname.0 '${test.db.alias}'" /> 
 	        </java>
 	</target>
 	
