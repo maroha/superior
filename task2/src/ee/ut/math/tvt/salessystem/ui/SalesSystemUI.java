@@ -1,14 +1,5 @@
 package ee.ut.math.tvt.salessystem.ui;
 
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
-
-import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
-import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
-import ee.ut.math.tvt.salessystem.ui.tabs.ClientTab;
-import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
-import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
-import ee.ut.math.tvt.salessystem.ui.tabs.StockTab;
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -23,6 +14,15 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.Logger;
+
+import com.jgoodies.looks.windows.WindowsLookAndFeel;
+
+import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.salessystem.ui.tabs.ClientTab;
+import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
+import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
+import ee.ut.math.tvt.salessystem.ui.tabs.StockTab;
 
 /**
  * Graphical user interface of the sales system.

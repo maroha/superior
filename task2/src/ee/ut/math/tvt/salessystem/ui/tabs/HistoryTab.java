@@ -1,10 +1,5 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
-import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
-import ee.ut.math.tvt.salessystem.domain.data.Sale;
-import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
-import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
-
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,6 +11,11 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.data.Sale;
+import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 
 /**

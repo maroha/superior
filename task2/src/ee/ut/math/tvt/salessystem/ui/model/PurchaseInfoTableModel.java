@@ -1,14 +1,14 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
-import ee.ut.math.tvt.salessystem.domain.data.Sale;
-import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
-import ee.ut.math.tvt.salessystem.domain.data.StockItem;
-import ee.ut.math.tvt.salessystem.domain.exception.SalesSystemException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
+import ee.ut.math.tvt.salessystem.domain.data.Sale;
+import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
+import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.domain.exception.SalesSystemException;
 
 /**
  * Purchase history details model.
