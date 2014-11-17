@@ -37,17 +37,5 @@ public class StockItemTest {
 		Assert.assertEquals((Double)item1.getColumn(2), 13.82d, 0.0001d);
 		Assert.assertEquals(item1.getColumn(3), 3);
 	}
-	
-	
-	@Test
-	public void testEquals(){
-		Assert.assertTrue(item1.equals(item1));
-		Assert.assertTrue(item1.equals(item2));
-		
-		Assert.assertFalse(item1.equals(item3));
-		Assert.assertFalse(item1.equals(item4));
-		Assert.assertFalse(item1.equals(item5));
-		Assert.assertFalse(item1.equals(item6));
-		Assert.assertFalse(item1.equals(item7));
-	}
+
 }

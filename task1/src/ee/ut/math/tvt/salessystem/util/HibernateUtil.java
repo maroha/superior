@@ -1,7 +1,5 @@
 package ee.ut.math.tvt.salessystem.util;
 
-import java.net.ConnectException;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

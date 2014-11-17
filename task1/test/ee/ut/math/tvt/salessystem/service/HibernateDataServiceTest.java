@@ -1,39 +1,118 @@
 package ee.ut.math.tvt.salessystem.service;
 
-import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.Assert;
 
-import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
+import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.util.HibernateUtil;
-
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hibernate.Session;
 
 //During testing, data for Hibernate DB should be retrieved from test.data folder
 //Use ant target test.startdb instead of target startdb
 public class HibernateDataServiceTest {
 	
-	StockItem stockItem1, stockItem20;
-	
-	@Before
-	public void setUp(){
-		stockItem1 = new StockItem(1L,"Lays Chips","Desc is not important",5.00000000000000000000000000000000d,18);
-		stockItem20 = new StockItem(20L,"Durex condoms","Desc is not important",3.00000000000000000000000000000000d,8898);
+	@BeforeClass
+	public static void staticSetUp(){
 		Assert.assertNull("Database has not been started!", HibernateUtil.validationQuery());
 	}
 	
+	@Before
+	public void setUp(){
+
+	}
+	
 	@Test
-	public void testGetStockItemsFirstAndLastItem(){
+	public void testGetStockItem(){
 		List<StockItem> items = HibernateDataService.getStockItems();	
-		Assert.assertEquals(items.get(0), stockItem1);
-		Assert.assertEquals(items.get(19), stockItem20);
+		Assert.assertEquals(items.get(0).getId(), (Long)1L);
+		Assert.assertEquals(items.get(19).getId(), (Long)20L);
+	}
+	
+	@Test
+	public void testGetSoldItems(){
+		List<SoldItem> items = HibernateDataService.getSoldItems();
+		Assert.assertEquals(items.get(0).getId(), (Long)1L);
+		Assert.assertEquals(items.get(18).getId(), (Long)19L);
+	}
+	
+	@Test
+	public void testGetAcceptedOrders(){
+		List<AcceptedOrder> items = HibernateDataService.getAcceptedOrders();
+		Assert.assertEquals(items.get(0).getId(), (Long)1L);
+		Assert.assertEquals(items.get(4).getId(), (Long)5L);
+	}
+	
+	@Test
+	public void testGetIdentity(){
+		Assert.assertNotSame(HibernateDataService.getIdentity("STOCKITEM"), -1L);
+	}
+	
+	//dependency - testGetIdentity(), testGetStockItem()
+	@Test
+	public void testInsertStockItem(){
+		Integer id = HibernateDataService.getIdentity("STOCKITEM")+1;
+		StockItem newStockItem = new StockItem(id.longValue(), "stockitem_name_"+id, "stockitem_desc_"+id, id, id*2);
+		
+		Assert.assertTrue("Adding StockItem to DB", HibernateDataService.insertStockItem(newStockItem));
+		
+		List<StockItem> result = HibernateDataService.getStockItems();
+		StockItem fromDb = result.get(result.size()-1);
+		Assert.assertEquals(fromDb.getId(), newStockItem.getId());
+		Assert.assertEquals(fromDb.getName(), newStockItem.getName());
+		Assert.assertEquals(fromDb.getDescription(), newStockItem.getDescription());
+		Assert.assertEquals(fromDb.getPrice(), newStockItem.getPrice());
+		Assert.assertEquals(fromDb.getQuantity(), newStockItem.getQuantity());
+	}
+	
+	//dependency - testGetStockItem()
+	@Test
+	public void testUpdateStockItemQuantity(){
+		List<StockItem> oldItems = HibernateDataService.getStockItems();
+		oldItems.get(0).quantityProperty().add(1);
+		HibernateDataService.updateStockItemQuantity(oldItems.get(0));
+		List<StockItem> newItems = HibernateDataService.getStockItems();	
+		Assert.assertEquals(newItems.get(0).getQuantity(), oldItems.get(0).getQuantity());
+	}
+	
+	//dependency - testGetIdentity(), testGetStockItem(), getAcceptedOrders()
+	@Test
+	public void testInsertAcceptedOrder(){
+		//create
+		List<StockItem> stockItems = HibernateDataService.getStockItems();
+		SoldItem soldItem1 = new SoldItem(stockItems.get(0), 5);
+		SoldItem soldItem2 = new SoldItem(stockItems.get(1), 10);
+		List<SoldItem> soldItems = new ArrayList<SoldItem>();
+		soldItems.add(soldItem1);
+		soldItems.add(soldItem2);
+		Integer id = HibernateDataService.getIdentity("ACCEPTEDORDER")+1;
+		AcceptedOrder order = new AcceptedOrder(id.longValue(), soldItems);
+		
+		//add
+		Assert.assertTrue(HibernateDataService.insertAcceptedOrder(order));
+		List<AcceptedOrder> resultItems = HibernateDataService.getAcceptedOrders();
+		
+		//check order vars
+		AcceptedOrder resultOrder = resultItems.get(resultItems.size()-1);
+		Assert.assertEquals(resultOrder.getId(), order.getId());
+		Assert.assertEquals(resultOrder.getSum(), order.getSum());
+		Assert.assertEquals(resultOrder.getDate(), order.getDate());
+		
+		//check solditem vars
+		SoldItem dbSoldItem1 = resultOrder.getItems().get(0);
+		SoldItem dbSoldItem2 = resultOrder.getItems().get(1);
+		
+		Assert.assertEquals(dbSoldItem1.getStockItem().getId(), soldItem1.getStockItem().getId());
+		Assert.assertEquals(dbSoldItem1.getQuantity(), soldItem1.getQuantity());	
+		
+		Assert.assertEquals(dbSoldItem2.getStockItem().getId(), soldItem2.getStockItem().getId());
+		Assert.assertEquals(dbSoldItem2.getQuantity(), soldItem2.getQuantity());	
 	}
 
 }

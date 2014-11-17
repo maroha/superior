@@ -3,6 +3,8 @@ package ee.ut.math.tvt.salessystem.service;
 import java.math.BigInteger;
 import java.util.List;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -46,6 +48,7 @@ public class HibernateDataService {
     	} catch(Exception e){ //something went wrong with the transaction
     		transaction.rollback();
     		log.info("Transaction end. Success: " + false);
+    		log.error(e);
     	}
     	return false;
 	}
@@ -86,6 +89,24 @@ public class HibernateDataService {
 		    	}
 			}
 		});
+	}
+
+	/**
+	 * @param string table
+	 * @return current identity value of the table
+	 */
+	public static Integer getIdentity(String table) {
+		final SimpleIntegerProperty identity = new SimpleIntegerProperty(-1);
+		doTransaction(new Runnable(){
+			@Override
+			public void run() {
+		    	Query id = session.createSQLQuery("SELECT MAX(ID) FROM " + table);
+		    	Integer result = (Integer)id.uniqueResult();
+		    	identity.set(result);
+			}
+		});
+		return identity.get();
+		
 	}
 	
 

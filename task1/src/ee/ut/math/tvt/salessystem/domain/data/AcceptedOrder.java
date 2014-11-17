@@ -46,9 +46,16 @@ public class AcceptedOrder implements Cloneable, DisplayableItem {
 	private double sum;
     
     public AcceptedOrder(List<SoldItem> items) {
-    	this.items = items;    
-    	for(SoldItem item: items){
-    		sum += item.getSum();
+    	this(-1L, items);
+    }
+    
+    public AcceptedOrder(Long id, List<SoldItem> items){
+    	this.id = id;
+    	if(items != null){
+    		this.items = items;    
+    		for(SoldItem item: items){
+    			sum += item.getSum();
+    		}
     	}
     	dateTime = LocalDateTime.now();
     }

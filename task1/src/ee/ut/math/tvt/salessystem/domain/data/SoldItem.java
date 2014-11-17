@@ -61,17 +61,24 @@ public class SoldItem implements Cloneable, DisplayableItem {
     private AcceptedOrder acceptedOrder;
 
 	public SoldItem(StockItem stockItem, int quantity) {
+		this(-1L, stockItem, quantity);
+	}
+	
+	public SoldItem(Long id, StockItem stockItem, int quantity) {
+		this.id = id;
 		this.stockItem = stockItem;
-		this.name = stockItem.getName();
-		this.price = stockItem.getPrice();
-        this.quantity = new SimpleIntegerProperty(quantity);
+		if (stockItem != null){
+			this.name = stockItem.getName();
+			this.price = stockItem.getPrice();
+		}
+		this.quantity = new SimpleIntegerProperty(quantity);
         sum = new SimpleDoubleProperty(this.price*quantity);
 	}
 	
 	public SoldItem(){}
 
 	public Long getId() {
-		return stockItem.getId();
+		return id;
 	}
 
 	public void setId(Long id) {
