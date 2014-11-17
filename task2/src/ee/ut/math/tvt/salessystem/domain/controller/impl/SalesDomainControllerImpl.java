@@ -120,9 +120,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
     }
 
 
-    public Sale getSale(Long id) {
-        return (Sale) session.get(Sale.class, id);
-    }
+    
 
     @Override
     public void endSession() {
