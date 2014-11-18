@@ -1,20 +1,12 @@
 package ee.ut.math.tvt.salessystem.ui.windows;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import org.apache.log4j.Logger;
 
@@ -109,8 +101,10 @@ public class PayingWindow {
                 try {
                     cash = Double.parseDouble(paidMoneyTextField.getText());
                 } catch (NumberFormatException nfe) {
+                    payingWindow.setAlwaysOnTop(false);
                     JOptionPane.showMessageDialog(null,
                             "Cash has to be in number format.");
+                    payingWindow.setAlwaysOnTop(true);
                     return;
                 }
                 double returnMoney = cash - totalPrice;
@@ -119,9 +113,13 @@ public class PayingWindow {
                 if (returnMoney >= 0) {
                     commitButton.setEnabled(true);
                 } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Not enough cash entered.");
-                }
+                    payingWindow.setAlwaysOnTop(false);
+                    JOptionPane.showMessageDialog(null, "Not enough cash");
+                    payingWindow.setAlwaysOnTop(true);
+                        }
+
+
+
             }
         });
     }
