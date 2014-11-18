@@ -11,7 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
-import ee.ut.math.tvt.salessystem.service.HibernateDataService;
+import ee.ut.math.tvt.salessystem.hibernate.HibernateDataService;
 
 /**
  * Stock item table model.

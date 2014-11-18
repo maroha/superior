@@ -1,6 +1,5 @@
-package ee.ut.math.tvt.salessystem.service;
+package ee.ut.math.tvt.salessystem.hibernate;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,7 +12,6 @@ import org.hibernate.Transaction;
 import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
-import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 @SuppressWarnings("unchecked")
 public class HibernateDataService {
@@ -37,6 +35,10 @@ public class HibernateDataService {
 		return result;
 	}
 	
+	public static StockItem getStockItem(long id){
+		return (StockItem)session.get(StockItem.class, id);
+	}
+	
 	private static boolean doTransaction(Runnable action){
 		log.info("Transaction begin:");
 		Transaction transaction = session.beginTransaction();
@@ -57,8 +59,7 @@ public class HibernateDataService {
 		return doTransaction(new Runnable(){
 			@Override
 			public void run() {
-				Query q = session.createSQLQuery("INSERT INTO StockItem VALUES(" + item.getId() + ",'" + item.getName() + "'," + item.getPrice() + "," + item.getQuantity() + ",'" + item.getDescription() +"');");
-				q.executeUpdate();
+				session.save(item);
 			}
 		});
 	}
@@ -67,8 +68,9 @@ public class HibernateDataService {
 		return doTransaction(new Runnable(){
 			@Override
 			public void run() {
-		    	Query q = session.createSQLQuery("UPDATE StockItem SET QUANTITY=" + item.getQuantity() + " WHERE ID=" + item.getId());
-		    	q.executeUpdate();
+				StockItem fromDb = getStockItem(item.getId());
+				fromDb.setQuantity(item.getQuantity());
+				session.save(fromDb);
 			}
 		});
 	}
@@ -77,16 +79,7 @@ public class HibernateDataService {
 		return doTransaction(new Runnable(){
 			@Override
 			public void run() {
-		    	Query q = session.createSQLQuery("INSERT INTO AcceptedOrder VALUES (NULL, '" + item.getDate() +" "+ item.getTime() + "'," + item.getSum() + ");");
-		    	q.executeUpdate();
-		    	Query id_val = session.createSQLQuery("CALL IDENTITY();");
-		    	BigInteger acceptedOrderId = (BigInteger)id_val.uniqueResult();
-		    	acceptedOrderId.add(new BigInteger("1"));
-		    	item.setId(acceptedOrderId.longValue());
-		    	for(SoldItem soldItem: item.getItems()){
-		        	Query qs = session.createSQLQuery("INSERT INTO SoldItem VALUES (NULL," + soldItem.getStockItem().getId() + "," + acceptedOrderId + ",'" + soldItem.getName() +"',"+ soldItem.getQuantity() + "," +soldItem.getPrice() + ");");
-		        	qs.executeUpdate();
-		    	}
+				session.save(item);
 			}
 		});
 	}

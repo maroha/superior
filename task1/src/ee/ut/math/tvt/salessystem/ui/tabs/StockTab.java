@@ -66,18 +66,18 @@ public class StockTab extends Tab {
 		TextField descField = new TextField("");
 		TextField priceField = new TextField("0");
 		TextField quantityField = new TextField("1");
-		
+		//col row
 		panel.add(new Label("Id"), 0, 0);
-		panel.add(new Label("Name"), 0, 1);
-		panel.add(new Label("Desc"), 0, 2);
-		panel.add(new Label("Price"), 0, 3);
-		panel.add(new Label("Quantity"), 0,4);
+		panel.add(new Label("Name"), 2, 0);
+		panel.add(new Label("Desc"), 4, 0);
+		panel.add(new Label("Price"), 0, 1);
+		panel.add(new Label("Quantity"), 2,1);
 		
 		panel.add(idField, 1, 0);
-		panel.add(nameField, 1, 1);
-		panel.add(descField, 1, 2);
-		panel.add(priceField, 1, 3);
-		panel.add(quantityField, 1,4);
+		panel.add(nameField, 3, 0);
+		panel.add(descField, 5, 0);
+		panel.add(priceField, 1, 1);
+		panel.add(quantityField, 3,1);
 		
 		addItem = new Button("Add");
 		
@@ -124,7 +124,7 @@ public class StockTab extends Tab {
 				model.getWarehouseTableModel().addItem(item);
 			}});
 
-		panel.add(addItem, 0,40);
+		panel.add(addItem, 0,2);
 
 		TitledPane titledPane = new TitledPane("Add products", panel);
 		titledPane.setCollapsible(false);

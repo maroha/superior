@@ -12,7 +12,8 @@ import org.junit.Test;
 import ee.ut.math.tvt.salessystem.domain.data.AcceptedOrder;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
-import ee.ut.math.tvt.salessystem.util.HibernateUtil;
+import ee.ut.math.tvt.salessystem.hibernate.HibernateDataService;
+import ee.ut.math.tvt.salessystem.hibernate.HibernateUtil;
 
 //During testing, data for Hibernate DB should be retrieved from test.data folder
 //Use ant target test.startdb instead of target startdb
@@ -29,10 +30,17 @@ public class HibernateDataServiceTest {
 	}
 	
 	@Test
-	public void testGetStockItem(){
+	public void testGetStockItems(){
 		List<StockItem> items = HibernateDataService.getStockItems();	
 		Assert.assertEquals(items.get(0).getId(), (Long)1L);
 		Assert.assertEquals(items.get(19).getId(), (Long)20L);
+	}
+	
+	@Test
+	public void testGetStockItem(){
+		StockItem item1 = HibernateDataService.getStockItem(1);
+		Assert.assertEquals(item1.getId(), (Long)1L);
+		Assert.assertEquals(item1.getName(), "Lays Chips");
 	}
 	
 	@Test
@@ -58,7 +66,7 @@ public class HibernateDataServiceTest {
 	@Test
 	public void testInsertStockItem(){
 		Integer id = HibernateDataService.getIdentity("STOCKITEM")+1;
-		StockItem newStockItem = new StockItem(id.longValue(), "stockitem_name_"+id, "stockitem_desc_"+id, id, id*2);
+		StockItem newStockItem = new StockItem("stockitem_name_"+id, "stockitem_desc_"+id, id, id*2);
 		
 		Assert.assertTrue("Adding StockItem to DB", HibernateDataService.insertStockItem(newStockItem));
 		
@@ -75,7 +83,7 @@ public class HibernateDataServiceTest {
 	@Test
 	public void testUpdateStockItemQuantity(){
 		List<StockItem> oldItems = HibernateDataService.getStockItems();
-		oldItems.get(0).quantityProperty().add(1);
+		oldItems.get(0).setQuantity(oldItems.get(0).getQuantity()+1);
 		HibernateDataService.updateStockItemQuantity(oldItems.get(0));
 		List<StockItem> newItems = HibernateDataService.getStockItems();	
 		Assert.assertEquals(newItems.get(0).getQuantity(), oldItems.get(0).getQuantity());
@@ -91,8 +99,7 @@ public class HibernateDataServiceTest {
 		List<SoldItem> soldItems = new ArrayList<SoldItem>();
 		soldItems.add(soldItem1);
 		soldItems.add(soldItem2);
-		Integer id = HibernateDataService.getIdentity("ACCEPTEDORDER")+1;
-		AcceptedOrder order = new AcceptedOrder(id.longValue(), soldItems);
+		AcceptedOrder order = new AcceptedOrder(soldItems);
 		
 		//add
 		Assert.assertTrue(HibernateDataService.insertAcceptedOrder(order));
@@ -110,9 +117,11 @@ public class HibernateDataServiceTest {
 		
 		Assert.assertEquals(dbSoldItem1.getStockItem().getId(), soldItem1.getStockItem().getId());
 		Assert.assertEquals(dbSoldItem1.getQuantity(), soldItem1.getQuantity());	
+		Assert.assertEquals(dbSoldItem1.getSum(), soldItem1.getSum());	
 		
 		Assert.assertEquals(dbSoldItem2.getStockItem().getId(), soldItem2.getStockItem().getId());
 		Assert.assertEquals(dbSoldItem2.getQuantity(), soldItem2.getQuantity());	
+		Assert.assertEquals(dbSoldItem2.getSum(), soldItem2.getSum());	
 	}
 
 }

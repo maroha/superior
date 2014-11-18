@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -36,7 +37,7 @@ public class SoldItem implements Cloneable, DisplayableItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
     @ManyToOne
     @JoinColumn(name = "STOCKITEM_ID", nullable = false)
@@ -52,20 +53,14 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	@Column(name = "ITEMPRICE")
 	private double price;
 	
-    @Type(type="SimpleDoubleProperty")
-    @Column(name = "SOLD_QUANTITY*ITEMPRICE")
+    @Transient
     private SimpleDoubleProperty sum;
 	
     @ManyToOne
     @JoinColumn(name = "ACCEPTEDORDER_ID", nullable = false)
     private AcceptedOrder acceptedOrder;
-
-	public SoldItem(StockItem stockItem, int quantity) {
-		this(-1L, stockItem, quantity);
-	}
 	
-	public SoldItem(Long id, StockItem stockItem, int quantity) {
-		this.id = id;
+	public SoldItem(StockItem stockItem, int quantity) {
 		this.stockItem = stockItem;
 		if (stockItem != null){
 			this.name = stockItem.getName();
@@ -128,6 +123,10 @@ public class SoldItem implements Cloneable, DisplayableItem {
 
 	public void setStockItem(StockItem stockItem) {
 		this.stockItem = stockItem;
+	}
+	
+	public void setAcceptedOrder(AcceptedOrder order){
+		acceptedOrder = order;
 	}
 
 }

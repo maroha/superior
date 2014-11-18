@@ -48,7 +48,8 @@ public class HistoryTab extends Tab{
 			@Override
 			public void onChanged(
 					javafx.collections.ListChangeListener.Change<? extends AcceptedOrder> c) {
-				acceptedOrderItemsTable.getItems().setAll(table.getSelectionModel().getSelectedItem().getItems());
+				if(table.getSelectionModel().getSelectedItem() != null)
+					acceptedOrderItemsTable.getItems().setAll(table.getSelectionModel().getSelectedItem().getItems());
 			}
 		});
 		

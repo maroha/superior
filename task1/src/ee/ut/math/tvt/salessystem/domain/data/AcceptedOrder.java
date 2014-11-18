@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,27 +34,23 @@ public class AcceptedOrder implements Cloneable, DisplayableItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 	
     @Type(type="LocalDateTime")
 	@Column(name = "SALE_DATE")
 	private LocalDateTime dateTime;
 	
-    @OneToMany(mappedBy = "acceptedOrder")
+    @OneToMany(targetEntity = SoldItem.class, mappedBy = "acceptedOrder", cascade = CascadeType.ALL)
     private List<SoldItem> items;
 	
 	@Column(name = "TOTALPRICE")
 	private double sum;
     
-    public AcceptedOrder(List<SoldItem> items) {
-    	this(-1L, items);
-    }
-    
-    public AcceptedOrder(Long id, List<SoldItem> items){
-    	this.id = id;
+    public AcceptedOrder(List<SoldItem> items){
     	if(items != null){
     		this.items = items;    
     		for(SoldItem item: items){
+    			item.setAcceptedOrder(this);
     			sum += item.getSum();
     		}
     	}

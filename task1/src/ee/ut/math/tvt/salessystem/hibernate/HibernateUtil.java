@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.salessystem.util;
+package ee.ut.math.tvt.salessystem.hibernate;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -13,6 +13,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
  * Utility class that makes sure we has a single open hibernate session.
  */
 public class HibernateUtil {
+	
 	private static final Logger log = Logger.getLogger(HibernateUtil.class);
 
 	private static ServiceRegistry serviceRegistry;

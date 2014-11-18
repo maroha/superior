@@ -32,19 +32,19 @@ public class StockItem implements Cloneable, DisplayableItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-	@Column(name = "NAME")
+	@Column(name = "NAME", nullable=false)
     private String name;
 
-	@Column(name = "PRICE")
+	@Column(name = "PRICE", nullable=false)
     private double price;
 
     @Column(name ="DESCRIPTION")
     private String description;
     
     @Type(type="SimpleIntegerProperty")
-    @Column(name = "QUANTITY")
+    @Column(name = "QUANTITY", nullable=false)
     private SimpleIntegerProperty quantity;
     
     /**
@@ -59,6 +59,13 @@ public class StockItem implements Cloneable, DisplayableItem {
         this.name = name;
         this.description = desc;
         this.price = price;
+    }
+    
+    public StockItem(String name, String desc, double price, int quantity) {
+        this.name = name;
+        this.description = desc;
+        this.price = price;
+        this.quantity = new SimpleIntegerProperty(quantity);
     }
     
     public StockItem(Long id, String name, String desc, double price, int quantity) {
@@ -145,11 +152,13 @@ public class StockItem implements Cloneable, DisplayableItem {
         }
     }
     
-    
+    @Override
     public Object clone() {
         StockItem item =
             new StockItem(getId(), getName(), getDescription(), getPrice(), getQuantity());
         return item;
     }
+    
+    
 		
 }

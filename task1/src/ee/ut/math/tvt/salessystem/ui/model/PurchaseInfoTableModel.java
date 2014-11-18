@@ -3,7 +3,6 @@ package ee.ut.math.tvt.salessystem.ui.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -88,17 +87,27 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		return buffer.toString();
 	}
 	
+	public SoldItem getSoldWithStockItem(long stockItemId){
+		for(SoldItem item: this){
+			if(item.getStockItem().getId() == stockItemId)
+				return item;
+		}
+		return null;
+	}
+	
     /**
      * Add new StockItem to table.
+     * Does not check whether soldItem quantity is in harmony with stockItem quantity.
      */
     public void addItem(final SoldItem soldItem) {
-		try {
-			SoldItem item = getItemById(soldItem.getId());
-			item.setQuantity(item.getQuantity() + soldItem.getQuantity());
+		long stockItemId = soldItem.getStockItem().getId();
+		SoldItem existingItem = getSoldWithStockItem(stockItemId);
+		
+		if(existingItem != null){
+			existingItem.setQuantity(existingItem.getQuantity() + soldItem.getQuantity());
 			log.debug("Found existing item " + soldItem.getName()
 					+ " increased quantity by " + soldItem.getQuantity());
-		}
-		catch (NoSuchElementException e) {
+		}else{
 			add(soldItem);
 			log.debug("Added " + soldItem.getName()
 					+ " quantity of " + soldItem.getQuantity());
