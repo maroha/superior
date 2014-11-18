@@ -5,7 +5,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
@@ -17,7 +16,7 @@ public class HibernateUtil {
 	private static final Logger log = Logger.getLogger(HibernateUtil.class);
 
 	private static ServiceRegistry serviceRegistry;
-	public static final SessionFactory sessionFactory;
+	private static final SessionFactory sessionFactory;
 
 	static {
 		try {
@@ -49,19 +48,6 @@ public class HibernateUtil {
 		if (session != null)
 			session.close();
 		session = null;
-	}
-	
-	/**
-	 * @return null if query is successful, JDBCConnectionException if unable connect to db.
-	 */
-	public static Throwable validationQuery(){
-		try {
-			currentSession().createSQLQuery("call 1").uniqueResult();
-		} catch (JDBCConnectionException e) {
-			 return e;
-		}
-		return null;
-		
 	}
 
 }

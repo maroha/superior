@@ -84,7 +84,7 @@ public class PurchaseTab extends Tab {
 		return panel;
 	}
 	
-	public void createPurchaseConfirmationDialog(){
+	private void createPurchaseConfirmationDialog(){
 		VBox confirmPane = new VBox();
 
 		sumValue = new Label(
@@ -195,7 +195,7 @@ public class PurchaseTab extends Tab {
 	 */
 
 	/** Event handler for the <code>new purchase</code> event. */
-	protected void newPurchaseButtonClicked() {
+	private void newPurchaseButtonClicked() {
 		log.info("New sale process started");
 		try {
 			domainController.startNewPurchase();
@@ -206,7 +206,7 @@ public class PurchaseTab extends Tab {
 	}
 
 	/** Event handler for the <code>cancel purchase</code> event. */
-	protected void cancelPurchaseButtonClicked() {
+	private void cancelPurchaseButtonClicked() {
 		log.info("Sale cancelled");
 		try {
 			domainController.cancelCurrentPurchase(model);
@@ -217,7 +217,7 @@ public class PurchaseTab extends Tab {
 	}
 
 	/** Event handler for the <code>submit purchase</code> event. */
-	protected void submitPurchaseButtonClicked() {
+	private void submitPurchaseButtonClicked() {
 		sumValue.setText(String.valueOf(model.getCurrentPurchaseTableModel().getSum()));
 		Action response = purchaseConfirmDialog.show();
 		

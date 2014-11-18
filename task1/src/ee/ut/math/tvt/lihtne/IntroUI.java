@@ -26,7 +26,7 @@ import ee.ut.math.tvt.lihtne.util.Util;
  * Intro window for the lab3 team project.
  * @author Kevin Nemerzitski
  */
-public class IntroUI extends Stage {
+class IntroUI extends Stage {
 	
 	private static Logger log = Logger.getLogger(IntroUI.class);
 	
@@ -53,7 +53,7 @@ public class IntroUI extends Stage {
 	//Widgets conf
 	private int teamListCircleRadius = 3;
 	
-	Font font = new Font("Arial", 16);
+	private Font font = new Font("Arial", 16);
 	
 	//Insets (Padding)
 	private Insets rootPadding = new Insets(20,20,20,20);

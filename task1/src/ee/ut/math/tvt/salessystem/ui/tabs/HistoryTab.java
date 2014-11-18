@@ -23,7 +23,7 @@ public class HistoryTab extends Tab{
 
 	private SalesSystemModel model;
 	
-	TableView<SoldItem> acceptedOrderItemsTable;
+	private TableView<SoldItem> acceptedOrderItemsTable;
 	
     public HistoryTab(SalesSystemModel model) {
     	this.model = model;
@@ -65,7 +65,7 @@ public class HistoryTab extends Tab{
 		return titledPanel;
     }
     
-    public TitledPane drawItemsPane(){	
+    private TitledPane drawItemsPane(){	
         acceptedOrderItemsTable = new TableView<SoldItem>(new PurchaseInfoTableModel());
         acceptedOrderItemsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         acceptedOrderItemsTable.setPrefSize(getTabPane().widthProperty().get(),  getTabPane().heightProperty().get());

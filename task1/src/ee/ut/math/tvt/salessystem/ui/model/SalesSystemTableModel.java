@@ -21,7 +21,7 @@ public abstract class SalesSystemTableModel<T extends DisplayableItem> extends
 
 	protected final List<TableColumn<T, ?>> headers;
 
-	public SalesSystemTableModel(final List<TableColumn<T, ?>> headers) {
+	SalesSystemTableModel(final List<TableColumn<T, ?>> headers) {
 		super(new ArrayList<T>());
 		this.headers = headers;
 	}
@@ -43,16 +43,8 @@ public abstract class SalesSystemTableModel<T extends DisplayableItem> extends
 		return headers;
 	}
 
-	public String getColumnName(final int columnIndex) {
-		return headers.get(columnIndex).getText();
-	}
-
 	public int getRowCount() {
 		return size();
-	}
-
-	public Object getValueAt(final int rowIndex, final int columnIndex) {
-		return getColumnValue(get(rowIndex), columnIndex);
 	}
 
 	// search for item with the specified id

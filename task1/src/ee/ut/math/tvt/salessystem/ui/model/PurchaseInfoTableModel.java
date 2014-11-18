@@ -24,7 +24,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		super(defineTableColumns());
 	}
 	
-    public static List<TableColumn<SoldItem, ?>> defineTableColumns(){
+    private static List<TableColumn<SoldItem, ?>> defineTableColumns(){
     	List<TableColumn<SoldItem, ?>> columnList = new ArrayList<TableColumn<SoldItem, ?>>();
     	
         TableColumn<SoldItem, Integer> idCol = new TableColumn<SoldItem, Integer>("Id");

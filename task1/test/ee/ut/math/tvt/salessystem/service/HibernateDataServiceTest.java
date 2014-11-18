@@ -5,6 +5,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.hibernate.exception.JDBCConnectionException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,9 +20,23 @@ import ee.ut.math.tvt.salessystem.hibernate.HibernateUtil;
 //Use ant target test.startdb instead of target startdb
 public class HibernateDataServiceTest {
 	
+	
+	/**
+	 * @return null if query is successful, JDBCConnectionException if unable connect to db.
+	 */
+	public static Throwable validationQuery(){
+		try {
+			HibernateUtil.currentSession().createSQLQuery("call 1").uniqueResult();
+		} catch (JDBCConnectionException e) {
+			 return e;
+		}
+		return null;
+		
+	}
+	
 	@BeforeClass
 	public static void staticSetUp(){
-		Assert.assertNull("Database has not been started!", HibernateUtil.validationQuery());
+		Assert.assertNull("Database has not been started!", validationQuery());
 	}
 	
 	@Before
@@ -66,7 +81,7 @@ public class HibernateDataServiceTest {
 	@Test
 	public void testInsertStockItem(){
 		Integer id = HibernateDataService.getIdentity("STOCKITEM")+1;
-		StockItem newStockItem = new StockItem("stockitem_name_"+id, "stockitem_desc_"+id, id, id*2);
+		StockItem newStockItem = new StockItem(0L, "stockitem_name_"+id, "stockitem_desc_"+id, id, id*2);
 		
 		Assert.assertTrue("Adding StockItem to DB", HibernateDataService.insertStockItem(newStockItem));
 		

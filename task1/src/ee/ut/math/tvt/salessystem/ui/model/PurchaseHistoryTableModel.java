@@ -23,7 +23,7 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<AcceptedOrd
 		super(defineTableColumns());
 	}
 	
-    public static List<TableColumn<AcceptedOrder, ?>> defineTableColumns(){
+    private static List<TableColumn<AcceptedOrder, ?>> defineTableColumns(){
     	List<TableColumn<AcceptedOrder, ?>> columnList = new ArrayList<TableColumn<AcceptedOrder, ?>>();
     	
         TableColumn<AcceptedOrder, String> dateCol = new TableColumn<AcceptedOrder, String>("Date");

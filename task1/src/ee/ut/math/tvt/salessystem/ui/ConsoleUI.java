@@ -24,7 +24,7 @@ public class ConsoleUI {
 	
 	private static boolean consoleCreated;
 	
-	SalesSystemModel model;
+	private SalesSystemModel model;
 
 	public ConsoleUI(SalesDomainController domainController) {
 		consoleCreated = true;
@@ -136,10 +136,6 @@ public class ConsoleUI {
         	soldItem.setQuantity(Math.min(amount, stockItem.getQuantity()));
         	model.getCurrentPurchaseTableModel().addItem(soldItem);
 		}
-	}
-	
-	public static boolean isConsoleMode(){
-		return consoleCreated;
 	}
 	
 }

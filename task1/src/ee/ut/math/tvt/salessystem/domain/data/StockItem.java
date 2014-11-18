@@ -13,8 +13,6 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import ee.ut.math.tvt.salessystem.ui.ConsoleUI;
-
 
 @TypeDefs(
 	{
@@ -46,27 +44,6 @@ public class StockItem implements Cloneable, DisplayableItem {
     @Type(type="SimpleIntegerProperty")
     @Column(name = "QUANTITY", nullable=false)
     private SimpleIntegerProperty quantity;
-    
-    /**
-     * Constucts new <code>StockItem</code> with the specified values.
-     * @param id barcode id
-     * @param name name of the product
-     * @param desc description of the product
-     * @param price price of the product
-     */
-    public StockItem(Long id, String name, String desc, double price) {
-        this.id = id;
-        this.name = name;
-        this.description = desc;
-        this.price = price;
-    }
-    
-    public StockItem(String name, String desc, double price, int quantity) {
-        this.name = name;
-        this.description = desc;
-        this.price = price;
-        this.quantity = new SimpleIntegerProperty(quantity);
-    }
     
     public StockItem(Long id, String name, String desc, double price, int quantity) {
         this.id = id;
@@ -127,14 +104,7 @@ public class StockItem implements Cloneable, DisplayableItem {
     }
 
     public String toString() {
-    	if(ConsoleUI.isConsoleMode())
-    		return id + " " + name + " " + description + " " + price;
-    	else
-    		return name;
-    }
-    
-    public String extendedToString(){
-		return id + " " + name + " " + description + " " + price + " " + quantity.get();
+    	return id + " " + name + " " + description + " " + price;
     }
 
     /**
@@ -142,6 +112,7 @@ public class StockItem implements Cloneable, DisplayableItem {
      * as table rows in the SalesSstemTableModel. The order of the columns is:
      * id, name, price, quantity.
      */
+    @SuppressWarnings("ucd")
     public Object getColumn(int columnIndex) {
         switch(columnIndex) {
             case 0: return id;

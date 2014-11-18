@@ -188,7 +188,7 @@ public class PurchaseItemPanel extends GridPane {
     }
 
     // Fill dialog with data from the "database".
-    public void fillDialogFields() {
+    private void fillDialogFields() {
         StockItem stockItem = getStockItemByBarcode();
 
         if (stockItem != null) {
@@ -216,7 +216,7 @@ public class PurchaseItemPanel extends GridPane {
     /**
      * Add new item to the cart.
      */
-	public void addItemEventHandler() {
+	private void addItemEventHandler() {
         // add chosen item to the shopping cart.
         StockItem stockItem = getStockItemByBarcode();
             int quantity;

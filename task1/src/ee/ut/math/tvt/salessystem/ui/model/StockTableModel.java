@@ -26,7 +26,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		super(defineTableColumns());
 	}
 	
-    public static List<TableColumn<StockItem, ?>> defineTableColumns(){
+    private static List<TableColumn<StockItem, ?>> defineTableColumns(){
     	List<TableColumn<StockItem, ?>> columnList = new ArrayList<TableColumn<StockItem, ?>>();
     	
         TableColumn<StockItem, Integer> idCol = new TableColumn<StockItem, Integer>("Id");
