@@ -22,12 +22,9 @@ public class ConsoleUI {
 
 	private final SalesDomainController dc;
 	
-	private static boolean consoleCreated;
-	
 	private SalesSystemModel model;
 
 	public ConsoleUI(SalesDomainController domainController) {
-		consoleCreated = true;
 		this.dc = domainController;
 		
 		model = new SalesSystemModel(domainController);
